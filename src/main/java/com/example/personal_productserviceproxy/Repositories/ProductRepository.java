@@ -3,6 +3,8 @@ package com.example.personal_productserviceproxy.Repositories;
 import com.example.personal_productserviceproxy.Models.Categories;
 import com.example.personal_productserviceproxy.Models.Products;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
     public void deleteById(Long id);
     public List<Products> findAll();
     public boolean existsById(Long id);
-//    public List<Products> findAllProductsbycategory(Categories category);
+
+    @Query("SELECT p FROM Products p WHERE p.category.id = :categoryId")
+    public List<Products> findAllProductsByCategory(@Param("categoryId") Long categoryId);
 }

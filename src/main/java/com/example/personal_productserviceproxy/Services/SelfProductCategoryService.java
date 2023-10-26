@@ -34,14 +34,14 @@ public class SelfProductCategoryService implements IProductCategoryService{
 
     @Override
     public List<Products> getProductsInASingleCategory(String categoryName) {
-//        Optional<Categories> Optionalcategory= categoryRepository.findByName(categoryName);
-//        if (!Optionalcategory.isPresent()){
-//            throw new NullPointerException("Category Not Found");
-//        }
-//        Categories category= Optionalcategory.get();
-//        List<Products> productsList= productRepository.findAllProductsbycategory(category);
-//        return productsList;
-        return null;
+        Optional<Categories> Optionalcategory= categoryRepository.findByName(categoryName);
+        if (!Optionalcategory.isPresent()){
+            throw new NullPointerException("Category Not Found");
+        }
+        Categories category= Optionalcategory.get();
+        List<Products> productsList= productRepository.findAllProductsByCategory(category.getId());
+        return productsList;
+        
 
     }
 }
