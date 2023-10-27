@@ -43,4 +43,16 @@ public class SelfProductCategoryService implements IProductCategoryService{
         
 
     }
+
+    public Optional<Categories> findByName(String categoryName){
+        return categoryRepository.findByName(categoryName);
+    }
+
+    public Categories save(Categories category){
+        return categoryRepository.save(category);
+    }
+
+    public boolean existsById(Long categoryId){
+        return categoryRepository.existsById(categoryId);
+    }
 }

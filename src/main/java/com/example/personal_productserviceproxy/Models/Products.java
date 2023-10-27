@@ -15,7 +15,7 @@ public class Products extends BaseModel {
     private double price;
     private String description;
 
-    @ManyToOne(cascade= CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Categories category;
     private String imageUrl;
 

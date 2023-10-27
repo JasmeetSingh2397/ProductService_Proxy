@@ -19,6 +19,6 @@ public class Categories extends BaseModel{
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category",cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Products> productsList;
 }
