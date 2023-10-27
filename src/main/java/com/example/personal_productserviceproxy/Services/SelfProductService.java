@@ -83,4 +83,18 @@ public class SelfProductService implements IProductService{
         productRepository.deleteById(ProductId);
         return Optionalproduct.get();
     }
+
+    public List<Products> getProductsInASingleCategory(Long categoryId) {
+        if(!categoryRepository.existsById(categoryId)){
+            throw new NullPointerException("Category with specified id Not Found");
+        }
+
+        List<Products> productsList= productRepository.findAllProductsByCategory(categoryId);
+        if(productsList.isEmpty()){
+            throw new NullPointerException("No Products Found in the mentioned category");
+        }
+
+        return productsList;
+
+    }
 }

@@ -23,5 +23,7 @@ public class Main {
         product.setImageUrl("https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg");
         product.setCategory(categories);
         fakeStoreProductService.updateProduct(1L, product);
+
+//    Product(1L, product);
     }
 }

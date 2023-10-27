@@ -7,6 +7,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.FetchMode;
+
 
 import java.util.List;
 
