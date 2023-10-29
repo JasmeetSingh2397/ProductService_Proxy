@@ -7,7 +7,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.FetchMode;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 import java.util.List;
@@ -20,5 +22,6 @@ public class Categories extends BaseModel{
     private String description;
 
     @OneToMany(mappedBy = "category",cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+
     private List<Products> productsList;
 }

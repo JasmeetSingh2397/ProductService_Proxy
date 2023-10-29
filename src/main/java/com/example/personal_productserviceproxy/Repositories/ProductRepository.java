@@ -17,8 +17,12 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
     public Products save(Products product);
     public void deleteById(Long id);
     public List<Products> findAll();
-    public boolean existsById(Long id);
+    boolean existsById(Long id);
 
+    List<Products> findByPriceBetween(double greaterthan, double lessthan);
+    Optional<Products> findByProductsName(String productName);
+    List<Products> findByIdIsNotNullOOrderByPrice();
+    List<Products> findAllByisPublicFalse();
     @Query("SELECT p FROM Products p WHERE p.category.id = :categoryId")
     public List<Products> findAllProductsByCategory(@Param("categoryId") Long categoryId);
 }
