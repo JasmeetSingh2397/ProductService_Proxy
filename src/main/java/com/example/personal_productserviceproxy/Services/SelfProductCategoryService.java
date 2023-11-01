@@ -11,11 +11,10 @@ import java.util.Optional;
 
 @Service
 public class SelfProductCategoryService implements IProductCategoryService{
-        private SelfProductService selfProductService;
+
     private CategoryRepository categoryRepository;
 
-    public SelfProductCategoryService( CategoryRepository categoryRepository, SelfProductService selfProductService) {
-        this.selfProductService = selfProductService;
+    public SelfProductCategoryService( CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
@@ -30,8 +29,6 @@ public class SelfProductCategoryService implements IProductCategoryService{
     }
 
 
-
-
     @Override
     public List<Products> getProductsInASingleCategory(String categoryName) {
         Optional<Categories> Optionalcategory= categoryRepository.findByName(categoryName);
@@ -39,20 +36,9 @@ public class SelfProductCategoryService implements IProductCategoryService{
             throw new NullPointerException("Category Not Found");
         }
         Categories category= Optionalcategory.get();
-        return selfProductService.getProductsInASingleCategory(category.getId());
+
+        return categoryRepository.findAllProductsByCategory(category.getId());
         
 
-    }
-
-    public Optional<Categories> findByName(String categoryName){
-        return categoryRepository.findByName(categoryName);
-    }
-
-    public Categories save(Categories category){
-        return categoryRepository.save(category);
-    }
-
-    public boolean existsById(Long categoryId){
-        return categoryRepository.existsById(categoryId);
     }
 }

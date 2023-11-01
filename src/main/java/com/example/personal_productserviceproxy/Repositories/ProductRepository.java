@@ -19,10 +19,9 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
     public List<Products> findAll();
     boolean existsById(Long id);
 
-    List<Products> findByPriceBetween(double greaterthan, double lessthan);
-    Optional<Products> findByProductsName(String productName);
-    List<Products> findByIdIsNotNullOOrderByPrice();
-    List<Products> findAllByisPublicFalse();
-    @Query("SELECT p FROM Products p WHERE p.category.id = :categoryId")
-    public List<Products> findAllProductsByCategory(@Param("categoryId") Long categoryId);
+//    List<Products> findByPriceBetween(double greaterthan, double lessthan);
+//    Optional<Products> findByProductsName(String productName);
+//    List<Products> findByIdIsNotNullOrderByPrice();
+//    List<Products> findAllByisPublicFalse();
+
 }

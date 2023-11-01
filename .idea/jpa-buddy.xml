@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig" ddlActionDbType="mysql">
+    <option name="defaultUnitInitialized" value="true" />
+    <option name="renamerInitialized" value="true" />
+    <option name="sourceDbValue" value="bd1cc7a9-4ba5-4c63-926c-72f81626e413" />
+    <option name="sourceModelValue" value="Default" />
+    <option name="targetDbValue" value="bd1cc7a9-4ba5-4c63-926c-72f81626e413" />
+    <option name="isSnapshotDb" value="false" />
+    <option name="snapshotDbValue" value="bd1cc7a9-4ba5-4c63-926c-72f81626e413" />
+    <option name="snapshotModelValue" value="Default" />
+    <option name="snapshotDirValue" value="$PROJECT_DIR$/src/main/resources/db/migration" />
+    <option name="reverseEngineeringLastDbConnectionId" value="bd1cc7a9-4ba5-4c63-926c-72f81626e413__test" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/com/example/personal_productserviceproxy" />
+  </component>
+</project>
