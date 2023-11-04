@@ -14,12 +14,11 @@ import java.util.Optional;
 public class SelfProductService implements IProductService{
 
     private ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
-
     private SelfProductCategoryService selfProductCategoryService;
-    public SelfProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+
+    public SelfProductService(ProductRepository productRepository, SelfProductCategoryService selfProductCategoryService) {
         this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
+        this.selfProductCategoryService = selfProductCategoryService;
     }
 
     @Override
@@ -62,12 +61,12 @@ public class SelfProductService implements IProductService{
 
     private void checkifCategoryNameExists(Products product) {
         Categories category= product.getCategory();
-        Optional<Categories> Optionalcategory= categoryRepository.findByName(category.getName());
+        Optional<Categories> Optionalcategory= selfProductCategoryService.findByName(category.getName());
         if(Optionalcategory.isPresent()){
             product.setCategory(Optionalcategory.get());
         }
         else{
-            Categories savedCategory= categoryRepository.save(category);
+            Categories savedCategory= selfProductCategoryService.save(category);
             product.setCategory(savedCategory);
 
         }

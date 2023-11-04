@@ -25,33 +25,33 @@ public class ProductController {
 
     @GetMapping("")
     public ResponseEntity<List<ProductDto>> getAllProducts(){
+
         List<Products> products= productService.getAllProducts();
         List<ProductDto> productDtos= new ArrayList<>();
         for(Products product: products){
             productDtos.add(convertToProductDto(product));
-        }
-        return new ResponseEntity<>(productDtos, HttpStatus.OK);
 
+        }
+
+        return new ResponseEntity<>(productDtos, HttpStatus.OK);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getSingleProduct(@PathVariable("id") Long ProductId){
-        try{
-            MultiValueMap<String, String> headers= new LinkedMultiValueMap<>();
-            headers.add("Accept", "application/json");
-            headers.add("Content-Type", "application/json");
-            headers.add("auth-token", "heyaccess");
-            Products product= productService.getSingleProduct(ProductId);
-            if(ProductId<1){
-                throw new IllegalArgumentException("Something went wrong");
-            }
-            return new ResponseEntity<>(convertToProductDto(product),headers, HttpStatus.OK);
 
-        }catch(Exception e){
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            throw e;
+        MultiValueMap<String, String> headers= new LinkedMultiValueMap<>();
+        headers.add("Accept", "application/json");
+        headers.add("Content-Type", "application/json");
+        headers.add("auth-token", "heyaccess");
+        Products product= productService.getSingleProduct(ProductId);
+        if(ProductId<1){
+            throw new IllegalArgumentException("Something went wrong");
         }
+        return new ResponseEntity<>(convertToProductDto(product),headers, HttpStatus.OK);
+
     }
+
 
     public Products convertProductDtoToProduct(ProductDto productDto){
 
@@ -70,7 +70,9 @@ public class ProductController {
     public ResponseEntity<ProductDto> addNewProduct(@RequestBody ProductDto productDto){
 
         Products newProduct= productService.addNewProduct(convertProductDtoToProduct(productDto));
-        ResponseEntity<ProductDto> responseEntity= new ResponseEntity<>(productDto, HttpStatus.OK);
+        ProductDto newProductDto= convertToProductDto(newProduct);
+
+        ResponseEntity<ProductDto> responseEntity= new ResponseEntity<>(newProductDto, HttpStatus.OK);
         return responseEntity;
 
 
@@ -80,16 +82,18 @@ public class ProductController {
     public ResponseEntity<ProductDto> patchProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto){
         Products product = convertProductDtoToProduct(productDto);
         productService.updateProduct(productId, product);
+        ProductDto updatedProductDto= convertToProductDto(product);
 
-        return new ResponseEntity<>(productDto, HttpStatus.OK);
+        return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductDto> putProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto){
         Products product = convertProductDtoToProduct(productDto);
         productService.replaceProduct(productId, product);
+        ProductDto replacedProductDto= convertToProductDto(product);
 
-        return new ResponseEntity<>(productDto, HttpStatus.OK);
+        return new ResponseEntity<>(replacedProductDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
