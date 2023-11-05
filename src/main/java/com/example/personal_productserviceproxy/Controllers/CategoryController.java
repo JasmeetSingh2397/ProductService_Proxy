@@ -1,10 +1,12 @@
 package com.example.personal_productserviceproxy.Controllers;
 
+import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.CategoryDTO;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Models.Categories;
 import com.example.personal_productserviceproxy.Models.Products;
 import com.example.personal_productserviceproxy.Services.IProductCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ public class CategoryController {
 
     private IProductCategoryService ProductcategoryService;
 
+    @Autowired
     public CategoryController(IProductCategoryService ProductCategoryService) {
         this.ProductcategoryService = ProductCategoryService;
     }
@@ -42,20 +45,11 @@ public class CategoryController {
         List<Products> productsList= ProductcategoryService.getProductsInASingleCategory(categoryName);
         List<ProductDto> productDtoList= new ArrayList<>();
         for(Products product: productsList){
-            productDtoList.add(convertToProductDto(product));
+            productDtoList.add(CommonlyUsedMethods.convertProductToProductDto(product));
         }
         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
     }
 
-    public ProductDto convertToProductDto(Products product){
-        ProductDto productDto= new ProductDto();
-        productDto.setId(product.getId());
-        productDto.setTitle(product.getTitle());
-        productDto.setPrice(product.getPrice());
-        productDto.setDescription(product.getDescription());
-        productDto.setImageUrl(product.getImageUrl());
-        productDto.setCategory(product.getCategory().getName());
-        return productDto;
-    }
+
 
 }

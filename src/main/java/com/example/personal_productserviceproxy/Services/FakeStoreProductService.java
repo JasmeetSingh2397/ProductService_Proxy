@@ -5,6 +5,7 @@ import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreP
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Models.Categories;
 import com.example.personal_productserviceproxy.Models.Products;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class FakeStoreProductService implements IProductService{
 
 
     private FakeStoreClient fakeStoreClient;
+
 
     public FakeStoreProductService(FakeStoreClient fakeStoreClient) {
 

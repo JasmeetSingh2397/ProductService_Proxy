@@ -1,5 +1,6 @@
 package com.example.personal_productserviceproxy.Controllers;
 
+import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Models.Categories;
 import com.example.personal_productserviceproxy.Models.Products;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
     private IProductService productService;
 
     public ProductController(IProductService productService) {
@@ -29,7 +31,7 @@ public class ProductController {
         List<Products> products= productService.getAllProducts();
         List<ProductDto> productDtos= new ArrayList<>();
         for(Products product: products){
-            productDtos.add(convertToProductDto(product));
+            productDtos.add(CommonlyUsedMethods.convertProductToProductDto(product));
 
         }
 
@@ -48,29 +50,17 @@ public class ProductController {
         if(ProductId<1){
             throw new IllegalArgumentException("Something went wrong");
         }
-        return new ResponseEntity<>(convertToProductDto(product),headers, HttpStatus.OK);
+        return new ResponseEntity<>(CommonlyUsedMethods.convertProductToProductDto(product),headers, HttpStatus.OK);
 
     }
 
 
-    public Products convertProductDtoToProduct(ProductDto productDto){
 
-        Products product= new Products();
-        product.setId(productDto.getId());
-        product.setTitle(productDto.getTitle());
-        product.setPrice(productDto.getPrice());
-        Categories category= new Categories();
-        category.setName(productDto.getCategory());
-        product.setCategory(category);
-        product.setImageUrl(productDto.getImageUrl());
-        product.setDescription(productDto.getDescription());
-        return product;
-    }
     @PostMapping()
     public ResponseEntity<ProductDto> addNewProduct(@RequestBody ProductDto productDto){
 
-        Products newProduct= productService.addNewProduct(convertProductDtoToProduct(productDto));
-        ProductDto newProductDto= convertToProductDto(newProduct);
+        Products newProduct= productService.addNewProduct(CommonlyUsedMethods.convertProductDtoToProduct(productDto));
+        ProductDto newProductDto= CommonlyUsedMethods.convertProductToProductDto(newProduct);
 
         ResponseEntity<ProductDto> responseEntity= new ResponseEntity<>(newProductDto, HttpStatus.OK);
         return responseEntity;
@@ -80,18 +70,18 @@ public class ProductController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<ProductDto> patchProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto){
-        Products product = convertProductDtoToProduct(productDto);
+        Products product = CommonlyUsedMethods.convertProductDtoToProduct(productDto);
         productService.updateProduct(productId, product);
-        ProductDto updatedProductDto= convertToProductDto(product);
+        ProductDto updatedProductDto= CommonlyUsedMethods.convertProductToProductDto(product);
 
         return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductDto> putProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto){
-        Products product = convertProductDtoToProduct(productDto);
+        Products product = CommonlyUsedMethods.convertProductDtoToProduct(productDto);
         productService.replaceProduct(productId, product);
-        ProductDto replacedProductDto= convertToProductDto(product);
+        ProductDto replacedProductDto= CommonlyUsedMethods.convertProductToProductDto(product);
 
         return new ResponseEntity<>(replacedProductDto, HttpStatus.OK);
     }
@@ -100,17 +90,7 @@ public class ProductController {
     public ResponseEntity<ProductDto> deleteProduct(@PathVariable("id") Long productId){
 
         Products product= productService.deleteProduct(productId);
-        return new ResponseEntity<>(convertToProductDto(product), HttpStatus.OK);
+        return new ResponseEntity<>(CommonlyUsedMethods.convertProductToProductDto(product), HttpStatus.OK);
     }
 
-    public ProductDto convertToProductDto(Products product){
-        ProductDto productDto= new ProductDto();
-        productDto.setId(product.getId());
-        productDto.setTitle(product.getTitle());
-        productDto.setPrice(product.getPrice());
-        productDto.setCategory(product.getCategory().getName());
-        productDto.setImageUrl(product.getImageUrl());
-        productDto.setDescription(product.getDescription());
-        return productDto;
-    }
 }

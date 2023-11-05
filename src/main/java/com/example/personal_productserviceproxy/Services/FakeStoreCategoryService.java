@@ -5,6 +5,7 @@ import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreC
 import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreProductDTO;
 import com.example.personal_productserviceproxy.Models.Categories;
 import com.example.personal_productserviceproxy.Models.Products;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +15,8 @@ import java.util.List;
 public class FakeStoreCategoryService implements IProductCategoryService{
     
     private FakeStoreClient fakeStoreClient;
-    
+
+
     public FakeStoreCategoryService(FakeStoreClient fakeStoreClient) {
         this.fakeStoreClient = fakeStoreClient;
     }

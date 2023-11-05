@@ -4,12 +4,13 @@ import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Models.Categories;
 import com.example.personal_productserviceproxy.Models.Products;
-import com.example.personal_productserviceproxy.Services.IProductService;
+import com.example.personal_productserviceproxy.Services.SelfProductService;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -17,21 +18,21 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class ProductControllerTest {
-    @MockBean
-    IProductService productService;
+//    @MockBean
+//    IProductService productService;
 
     @Autowired
     ProductController productController;
+    @Captor
+    private ArgumentCaptor<Long> idCaptor;
 
+    @MockBean
+    SelfProductService productService;
 
-    CommonlyUsedMethods commonlyUsedMethods= new CommonlyUsedMethods();
 
     @Test
     public void test_whenGetSingleProductIsCalled_ReturnCorrectProduct(){
@@ -71,7 +72,7 @@ public class ProductControllerTest {
         when(productService.getAllProducts()).thenReturn(products);
         List<ProductDto> ExpectedproductDtos= new ArrayList<>();
 
-        ExpectedproductDtos.add(commonlyUsedMethods.convertToProductDto(productToCreate));
+        ExpectedproductDtos.add(CommonlyUsedMethods.convertProductToProductDto(productToCreate));
 
         ResponseEntity<List<ProductDto>> productDtosResponseEntity= productController.getAllProducts();
         assertNotNull(productDtosResponseEntity);
@@ -99,7 +100,7 @@ public class ProductControllerTest {
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.replaceProduct(any(Long.class), any(Products.class))).thenReturn(expectedProduct);
 
@@ -139,7 +140,7 @@ public class ProductControllerTest {
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.updateProduct(any(Long.class), any(Products.class))).thenReturn(expectedProduct);
 
@@ -204,7 +205,7 @@ public class ProductControllerTest {
         expectedProduct.setCategory(category);
         expectedProduct.setId(1L);
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.addNewProduct(any(Products.class))).thenReturn(expectedProduct);
 
@@ -212,5 +213,32 @@ public class ProductControllerTest {
         assertNotNull(productDtoResponseEntity);
         assertEquals(productDtoExpected.getId(), productDtoResponseEntity.getBody().getId());
     }
+
+//    @Test
+//    void test_ifProductControllerCallsProductService_withSameId(){
+////        Long id= 1L;
+////        when(productService.getSingleProduct(id)).thenCallRealMethod();
+////        productController.getSingleProduct(id);
+////
+////
+////        verify(productService).getSingleProduct(idCaptor.capture());
+////        verify(productService,times(1)).getSingleProduct(any());
+////
+////        assertEquals(id,idCaptor.getValue());
+//
+//        Long id= 1L;
+//
+//        // No need to mock the `getSingleProduct()` method, as we are calling the real method.
+//
+//        productController.getSingleProduct(id);
+//
+//
+//        // Verify that the `getSingleProduct()` method was called with the correct argument.
+//        verify(productService).getSingleProduct(id);
+//
+//        // Verify that the `getSingleProduct()` method was called exactly once.
+//        verify(productService,times(1)).getSingleProduct(any());
+//    }
+
 
 }

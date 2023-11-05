@@ -5,30 +5,22 @@ import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Models.Categories;
 import com.example.personal_productserviceproxy.Models.Products;
 import com.example.personal_productserviceproxy.Services.IProductService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ProductController.class)
 public class ProductControllerMVCTest {
@@ -42,7 +34,6 @@ public class ProductControllerMVCTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    CommonlyUsedMethods commonlyUsedMethods= new CommonlyUsedMethods();
 
     @Test
     void test_whengetAllProductsCalled_thenReturnProductDto() throws Exception {
@@ -56,7 +47,7 @@ public class ProductControllerMVCTest {
         when(productService.getAllProducts()).thenReturn(products);
         List<ProductDto> productDtos= new ArrayList<>();
 
-        productDtos.add(commonlyUsedMethods.convertToProductDto(products.get(0)));
+        productDtos.add(CommonlyUsedMethods.convertProductToProductDto(products.get(0)));
 
         mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
@@ -81,7 +72,7 @@ public class ProductControllerMVCTest {
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.getSingleProduct(any(Long.class))).thenReturn(expectedProduct);
 
@@ -116,7 +107,7 @@ public class ProductControllerMVCTest {
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.replaceProduct(any(Long.class), any(Products.class))).thenReturn(expectedProduct);
 
@@ -155,7 +146,7 @@ public class ProductControllerMVCTest {
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.updateProduct(any(Long.class), any(Products.class))).thenReturn(expectedProduct);
 
@@ -191,7 +182,7 @@ public class ProductControllerMVCTest {
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.deleteProduct(any(Long.class))).thenReturn(expectedProduct);
 
@@ -218,12 +209,14 @@ public class ProductControllerMVCTest {
     @Test
     void test_whenaddnewProductCalled_thenReturnProductDto() throws Exception {
         ProductDto productToCreate = new ProductDto();
+        productToCreate.setTitle("Nikhil");
 
         Categories category= new Categories();
         Products expectedProduct = new Products();
         expectedProduct.setCategory(category);
+        expectedProduct.setTitle("Nikhil");
 
-        ProductDto productDtoExpected= commonlyUsedMethods.convertToProductDto(expectedProduct);
+        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
 
         when(productService.addNewProduct(any(Products.class))).thenReturn(expectedProduct);
 
@@ -232,7 +225,8 @@ public class ProductControllerMVCTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(productToCreate)))
                 .andExpect(status().isOk())
-                .andExpect(content().string(objectMapper.writeValueAsString(productDtoExpected)));
+                .andExpect(content().string(objectMapper.writeValueAsString(productDtoExpected)))
+                .andExpect(jsonPath("$.title", is("Nikhil")));
     }
 
 
