@@ -5,21 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73d8c4d6-53ab-4eca-b0a4-55718dcc7c76" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerMvcTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/CategoryNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/NoCategoriesFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/NoProductsFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/NoProductsInCategoryException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/ProductNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/test.kkQ2AA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/test.kkQ2AA.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/FakeStore/Client/FakeStoreClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/FakeStore/Client/FakeStoreClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/CommonlyUsedMethods.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/DTOs/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/DTOs/CategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/DTOs/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/DTOs/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Models/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Models/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Models/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Models/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Repositories/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Repositories/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Repositories/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Repositories/ProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/CommonlyUsedMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/CommonlyUsedMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerMvcTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerMVCTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerMVCTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Repositories/ProductRepoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Repositories/ProductRepoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Clients/FakeStore/Client/FakeStoreClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Clients/FakeStore/Client/FakeStoreClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/CategoryController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/DTOs/ProductDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/DTOs/ProductDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Models/Categories.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Models/Products.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Repositories/CategoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Repositories/CategoryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Repositories/ProductRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Repositories/ProductRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductCategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/personal_productserviceproxy/Repositories/ProductRepoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/personal_productserviceproxy/Repositories/ProductRepoTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,34 +88,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hp/Personal_ProductServiceProxy&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/hp/IdeaProjects/Scaler_Case_Studies/BookMyShow",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hp\Personal_ProductServiceProxy\src\main\java\com\example\personal_productserviceproxy\InhertitanceExamples\tablePerClass" />
@@ -98,21 +131,8 @@
       <command value="FakeStoreCategoryService" />
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.PersonalProductServiceProxyApplication">
-    <configuration name="CategoryControllerMvcTest,test_whengetAllCategoriesCalled_thenReturnCategoryDtoList and 3 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Personal_ProductServiceProxy" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="com.example.personal_productserviceproxy.Controllers.CategoryControllerMvcTest,test_whengetAllCategoriesCalled_thenReturnCategoryDtoList" />
-        <pattern testClass="com.example.personal_productserviceproxy.Controllers.CategoryControllerMvcTest,test_whengetAllCategoriesCalled_thenThrowException" />
-        <pattern testClass="com.example.personal_productserviceproxy.Controllers.CategoryControllerMvcTest,test_whengetProductsInASingleCategoryCalled_thenReturnProductDtoList" />
-        <pattern testClass="com.example.personal_productserviceproxy.Controllers.CategoryControllerMvcTest,test_whengetProductsInASingleCategoryCalled_thenThrowException" />
-      </patterns>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CategoryControllerTest.test_whengetAllCategoriesCalled_thenReturnCategoryDtoList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ProductControllerMVCTest">
+    <configuration name="CategoryControllerMvcTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Personal_ProductServiceProxy" />
       <extension name="coverage">
         <pattern>
@@ -121,14 +141,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.personal_productserviceproxy.Controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.example.personal_productserviceproxy.Controllers.CategoryControllerTest" />
-      <option name="METHOD_NAME" value="test_whengetAllCategoriesCalled_thenReturnCategoryDtoList" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="com.example.personal_productserviceproxy.Controllers.CategoryControllerMvcTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductControllerMVCTest.test_whenaddnewProductCalled_thenReturnProductDto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductControllerMVCTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Personal_ProductServiceProxy" />
       <extension name="coverage">
         <pattern>
@@ -138,8 +157,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example.personal_productserviceproxy.Controllers" />
       <option name="MAIN_CLASS_NAME" value="com.example.personal_productserviceproxy.Controllers.ProductControllerMVCTest" />
-      <option name="METHOD_NAME" value="test_whenaddnewProductCalled_thenReturnProductDto" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,6 +193,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ProductControllerTest.test_whengetAllProductsCalled_thenIsExceptionHandledOrNot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Personal_ProductServiceProxy" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.personal_productserviceproxy.Controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.personal_productserviceproxy.Controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.example.personal_productserviceproxy.Controllers.ProductControllerTest" />
+      <option name="METHOD_NAME" value="test_whengetAllProductsCalled_thenIsExceptionHandledOrNot" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PersonalProductServiceProxyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="Personal_ProductServiceProxy" />
@@ -185,11 +219,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProductControllerMVCTest" />
+        <item itemvalue="JUnit.CategoryControllerMvcTest" />
+        <item itemvalue="JUnit.ProductControllerTest.test_whengetAllProductsCalled_thenIsExceptionHandledOrNot" />
         <item itemvalue="JUnit.ProductControllerTest" />
         <item itemvalue="JUnit.ProductControllerTest.test_ifProductControllerCallsProductService_withSameId" />
-        <item itemvalue="JUnit.ProductControllerMVCTest.test_whenaddnewProductCalled_thenReturnProductDto" />
-        <item itemvalue="JUnit.CategoryControllerTest.test_whengetAllCategoriesCalled_thenReturnCategoryDtoList" />
-        <item itemvalue="JUnit.CategoryControllerMvcTest,test_whengetAllCategoriesCalled_thenReturnCategoryDtoList and 3 more" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +251,9 @@
       <workItem from="1698867351936" duration="8682000" />
       <workItem from="1698963715453" duration="25796000" />
       <workItem from="1699080252003" duration="9000" />
-      <workItem from="1699131239892" duration="10303000" />
+      <workItem from="1699131239892" duration="10952000" />
+      <workItem from="1699166955666" duration="1330000" />
+      <workItem from="1699210717089" duration="13395000" />
     </task>
     <servers />
   </component>

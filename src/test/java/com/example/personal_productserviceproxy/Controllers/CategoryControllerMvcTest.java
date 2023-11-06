@@ -1,10 +1,12 @@
 package com.example.personal_productserviceproxy.Controllers;
 
-import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.CategoryDTO;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
+import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundException;
+import com.example.personal_productserviceproxy.Exceptions.NoCategoriesFoundException;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsInCategoryException;
+import com.example.personal_productserviceproxy.Models.Category;
+import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.IProductCategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -35,15 +37,15 @@ public class CategoryControllerMvcTest {
 
 
     @Test
-    void test_whengetAllCategoriesCalled_thenReturnCategoryDtoList() throws Exception {
-        List<Categories> categoriesList= new ArrayList<>();
-        Categories category= new Categories();
+    void test_whenGetAllCategoriesIsCalled_thenReturnCorrectCategoryDtoList() throws Exception {
+        List<Category> categoryList = new ArrayList<>();
+        Category category= new Category();
         category.setName("Electronics");
-        categoriesList.add(category);
+        categoryList.add(category);
 
-        when(productCategoryService.getAllProductCategories()).thenReturn(categoriesList);
+        when(productCategoryService.getAllProductCategories()).thenReturn(categoryList);
         List<CategoryDTO> categoryDTOList= new ArrayList<>();
-        categoryDTOList.add(CommonlyUsedMethods.convertCategoryToCategoryDto(category));
+        categoryDTOList.add(CategoryDTO.mapCategoryToCategoryDto(category));
 
 
         mockMvc.perform(get("/products/categories"))
@@ -53,29 +55,29 @@ public class CategoryControllerMvcTest {
 
 
     @Test
-    void test_whengetAllCategoriesCalled_thenThrowException() throws Exception {
+    void test_whenGetAllCategoriesIsCalled_thenThrowNoCategoriesFoundException() throws Exception {
 
         when(productCategoryService.getAllProductCategories()).
-                thenThrow(new NullPointerException("No Categories Found"));
+                thenThrow(new NoCategoriesFoundException("No Categories Found"));
         mockMvc.perform(get("/products/categories"))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isOk())
                 .andExpect(content().string("No Categories Found"));
     }
 
     @Test
-    void test_whengetProductsInASingleCategoryCalled_thenReturnProductDtoList() throws Exception {
-        Categories categoryToSearch= new Categories();
+    void test_whenGetProductsInASingleCategoryIsCalled_thenReturnCorrectProductDtoList() throws Exception {
+        Category categoryToSearch= new Category();
         categoryToSearch.setName("Electronics");
 
-        List<Products> productsList= new ArrayList<>();
-        Products product= new Products();
+        List<Product> productList = new ArrayList<>();
+        Product product= new Product();
         product.setCategory(categoryToSearch);
-        productsList.add(product);
+        productList.add(product);
 
-        when(productCategoryService.getProductsInASingleCategory(any(String.class))).thenReturn(productsList);
+        when(productCategoryService.getProductsInASingleCategory(any(String.class))).thenReturn(productList);
 
         List<ProductDto> expectedproductDtoList= new ArrayList<>();
-        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(product);
+        ProductDto productDtoExpected= ProductDto.mapProductToProductDto(product);
         expectedproductDtoList.add(productDtoExpected);
 
         mockMvc.perform(
@@ -85,15 +87,28 @@ public class CategoryControllerMvcTest {
     }
 
     @Test
-    void test_whengetProductsInASingleCategoryCalled_thenThrowException() throws Exception {
-        Categories categoryToSearch= new Categories();
+    void test_whenGetProductsInASingleCategoryIsCalled_thenThrowCategoryNotFoundException() throws Exception {
+        Category categoryToSearch= new Category();
         categoryToSearch.setName("Electronics");
 
         when(productCategoryService.getProductsInASingleCategory(any(String.class))).
-                thenThrow(new NullPointerException("Category Not Found"));
+                thenThrow(new CategoryNotFoundException("Category Not Found"));
         mockMvc.perform(
                 get("/products/category/{name}",categoryToSearch.getName()))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string("Category Not Found"));
+    }
+
+    @Test
+    void test_whenGetProductsInASingleCategoryIsCalled_thenThrowNoProductsInCategoryException() throws Exception {
+        Category categoryToSearch= new Category();
+        categoryToSearch.setName("Electronics");
+
+        when(productCategoryService.getProductsInASingleCategory(any(String.class))).
+                thenThrow(new NoProductsInCategoryException("No Products Found in the mentioned Category"));
+        mockMvc.perform(
+                get("/products/category/{name}",categoryToSearch.getName()))
+                .andExpect(status().isOk())
+                .andExpect(content().string("No Products Found in the mentioned Category"));
     }
 }

@@ -1,22 +1,18 @@
 package com.example.personal_productserviceproxy.Repositories;
 
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
+import com.example.personal_productserviceproxy.Models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Products, Long> {
-    public Optional<Products> findById(Long id);
-    public Products save(Products product);
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    public Optional<Product> findById(Long id);
+    public Product save(Product product);
     public void deleteById(Long id);
-    public List<Products> findAll();
+    public List<Product> findAll();
     boolean existsById(Long id);
 
 //    List<Products> findByPriceBetween(double greaterthan, double lessthan);

@@ -1,10 +1,13 @@
 package com.example.personal_productserviceproxy.Controllers;
 
-import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.CategoryDTO;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
+import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundException;
+import com.example.personal_productserviceproxy.Exceptions.NoCategoriesFoundException;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsInCategoryException;
+import com.example.personal_productserviceproxy.Models.Category;
+import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.IProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,26 +29,26 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<List<CategoryDTO>> getAllProductCategories(){
+    public ResponseEntity<List<CategoryDTO>> getAllProductCategories() throws NoCategoriesFoundException {
 
-        List<Categories> categoriesList= ProductcategoryService.getAllProductCategories();
+        List<Category> categoryList = ProductcategoryService.getAllProductCategories();
 
         List<CategoryDTO> categoryDTOList= new ArrayList<>();
-        for(Categories categories: categoriesList){
+        for(Category category : categoryList){
             CategoryDTO categoryDTO= new CategoryDTO();
-            categoryDTO.setName(categories.getName());
+            categoryDTO.setName(category.getName());
 //            categoryDTO.setDescription(categories.getDescription());
             categoryDTOList.add(categoryDTO);
         }
         return new ResponseEntity<>(categoryDTOList, HttpStatus.OK);
     }
     @GetMapping("/category/{categoryName}")
-    public ResponseEntity<List<ProductDto>> getProductsinCategory(@PathVariable("categoryName") String categoryName){
+    public ResponseEntity<List<ProductDto>> getProductsInCategory(@PathVariable("categoryName") String categoryName) throws CategoryNotFoundException, NoProductsInCategoryException {
 
-        List<Products> productsList= ProductcategoryService.getProductsInASingleCategory(categoryName);
+        List<Product> productList = ProductcategoryService.getProductsInASingleCategory(categoryName);
         List<ProductDto> productDtoList= new ArrayList<>();
-        for(Products product: productsList){
-            productDtoList.add(CommonlyUsedMethods.convertProductToProductDto(product));
+        for(Product product: productList){
+            productDtoList.add(ProductDto.mapProductToProductDto(product));
         }
         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
     }

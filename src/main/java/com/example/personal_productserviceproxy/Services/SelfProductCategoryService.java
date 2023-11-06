@@ -1,9 +1,11 @@
 package com.example.personal_productserviceproxy.Services;
 
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
+import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundException;
+import com.example.personal_productserviceproxy.Exceptions.NoCategoriesFoundException;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsInCategoryException;
+import com.example.personal_productserviceproxy.Models.Category;
+import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Repositories.CategoryRepository;
-import com.example.personal_productserviceproxy.Repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +21,10 @@ public class SelfProductCategoryService implements IProductCategoryService{
     }
 
     @Override
-    public List<Categories> getAllProductCategories() {
-        List<Categories> categoryList = categoryRepository.findAll();
+    public List<Category> getAllProductCategories() throws NoCategoriesFoundException {
+        List<Category> categoryList = categoryRepository.findAll();
         if(categoryList.isEmpty()){
-            throw new NullPointerException("No Categories Found");
+            throw new NoCategoriesFoundException("No Categories Found");
         }
 
         return categoryList;
@@ -30,24 +32,28 @@ public class SelfProductCategoryService implements IProductCategoryService{
 
 
     @Override
-    public List<Products> getProductsInASingleCategory(String categoryName) {
-        Optional<Categories> Optionalcategory= categoryRepository.findByName(categoryName);
+    public List<Product> getProductsInASingleCategory(String categoryName) throws CategoryNotFoundException, NoProductsInCategoryException {
+        Optional<Category> Optionalcategory= categoryRepository.findByName(categoryName);
         if (Optionalcategory.isEmpty()){
-            throw new NullPointerException("Category Not Found");
+            throw new CategoryNotFoundException("Category Not Found");
         }
-        Categories category= Optionalcategory.get();
+        Category category= Optionalcategory.get();
 
-        return categoryRepository.findAllProductsByCategory(category.getId());
-        
+        List<Product> productsInCategory=  categoryRepository.findAllProductsByCategory(category.getId());
+        if(productsInCategory.isEmpty()){
+            throw new NoProductsInCategoryException("No Products Found in the mentioned Category");
+        }
+        return productsInCategory;
+
 
     }
 
-    public Optional<Categories> findByName(String categoryName){
+    public Optional<Category> findByName(String categoryName){
 
         return categoryRepository.findByName(categoryName);
     }
 
-    public Categories save(Categories category){
+    public Category save(Category category){
         return categoryRepository.save(category);
     }
 }

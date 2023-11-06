@@ -1,9 +1,9 @@
 package com.example.personal_productserviceproxy.Controllers;
 
-import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
+import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
+import com.example.personal_productserviceproxy.Models.Category;
+import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.SelfProductService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -35,13 +36,13 @@ public class ProductControllerTest {
 
 
     @Test
-    public void test_whenGetSingleProductIsCalled_ReturnCorrectProduct(){
-        Products product= new Products();
+    public void test_whenGetSingleProductIsCalled_ReturnCorrectProduct() throws ProductNotFoundException {
+        Product product= new Product();
         product.setId(2l);
         product.setTitle("test");
-        Categories categories= new Categories();
-        categories.setName("Electronics");
-        product.setCategory(categories);
+        Category category = new Category();
+        category.setName("Electronics");
+        product.setCategory(category);
         when(productService.getSingleProduct(any(Long.class))).thenReturn(product);
 
         ResponseEntity<ProductDto> productsResponseEntity= productController.getSingleProduct(2l);
@@ -59,11 +60,11 @@ public class ProductControllerTest {
 
     @Test
     void test_whengetAllProductsCalled_thenReturnProductDto() throws Exception {
-        ArrayList<Products> products = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
 
 
-        Products productToCreate = new Products();
-        Categories category= new Categories();
+        Product productToCreate = new Product();
+        Category category= new Category();
         productToCreate.setCategory(category);
         productToCreate.setId(1L);
         products.add(productToCreate);
@@ -72,7 +73,7 @@ public class ProductControllerTest {
         when(productService.getAllProducts()).thenReturn(products);
         List<ProductDto> ExpectedproductDtos= new ArrayList<>();
 
-        ExpectedproductDtos.add(CommonlyUsedMethods.convertProductToProductDto(productToCreate));
+        ExpectedproductDtos.add(ProductDto.mapProductToProductDto(productToCreate));
 
         ResponseEntity<List<ProductDto>> productDtosResponseEntity= productController.getAllProducts();
         assertNotNull(productDtosResponseEntity);
@@ -80,14 +81,21 @@ public class ProductControllerTest {
     }
 
 
-//    @Test
-//    void test_whengetAllProductsCalled_thenIsExceptionHandledOrNot() throws Exception {
-//
-//        when(productService.getAllProducts()).thenThrow(new NullPointerException("No Products Found"));
-////        assertThrows(NullPointerException.class,
-////                ()-> productController.getAllProducts());
-//
-//    }
+    @Test
+    void testWhenGetAllProductsCalledWithNoRecordsInDBThenThrowNullPointerException() throws Exception {
+
+        when(productService.getAllProducts()).thenThrow(new NullPointerException("No Products Found"));
+
+        try{
+            productController.getAllProducts();
+            fail();
+
+
+        }catch (NullPointerException e){
+            assertThat(e.getMessage()).isEqualTo("No Products Found");
+        }
+
+    }
 
     @Test
     void test_whenputProductCalled_thenReturnProductDto() throws Exception {
@@ -95,14 +103,14 @@ public class ProductControllerTest {
         ProductDto productToReplace = new ProductDto();
         productToReplace.setId(id);
 
-        Categories category= new Categories();
-        Products expectedProduct = new Products();
+        Category category= new Category();
+        Product expectedProduct = new Product();
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
+        ProductDto productDtoExpected= ProductDto.mapProductToProductDto(expectedProduct);
 
-        when(productService.replaceProduct(any(Long.class), any(Products.class))).thenReturn(expectedProduct);
+        when(productService.replaceProduct(any(Long.class), any(Product.class))).thenReturn(expectedProduct);
 
         ResponseEntity<ProductDto> productDtoResponseEntity = productController.putProduct(id, productToReplace);
 
@@ -135,14 +143,14 @@ public class ProductControllerTest {
         ProductDto productToReplace = new ProductDto();
         productToReplace.setId(id);
 
-        Categories category= new Categories();
-        Products expectedProduct = new Products();
+        Category category= new Category();
+        Product expectedProduct = new Product();
         expectedProduct.setCategory(category);
         expectedProduct.setId(id);
 
-        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
+        ProductDto productDtoExpected= ProductDto.mapProductToProductDto(expectedProduct);
 
-        when(productService.updateProduct(any(Long.class), any(Products.class))).thenReturn(expectedProduct);
+        when(productService.updateProduct(any(Long.class), any(Product.class))).thenReturn(expectedProduct);
 
         ResponseEntity<ProductDto> productDtoResponseEntity = productController.patchProduct(id, productToReplace);
 
@@ -168,12 +176,12 @@ public class ProductControllerTest {
 //
     @Test
     void test_whendeleteProductCalled_thenReturnProductDto() throws Exception {
-        Products product= new Products();
+        Product product= new Product();
         product.setId(2l);
         product.setTitle("test");
-        Categories categories= new Categories();
-        categories.setName("Electronics");
-        product.setCategory(categories);
+        Category category = new Category();
+        category.setName("Electronics");
+        product.setCategory(category);
         when(productService.deleteProduct(any(Long.class))).thenReturn(product);
 
         ResponseEntity<ProductDto> productsResponseEntity= productController.deleteProduct(2l);
@@ -200,14 +208,14 @@ public class ProductControllerTest {
         ProductDto productToCreate = new ProductDto();
         productToCreate.setId(1L);
 
-        Categories category= new Categories();
-        Products expectedProduct = new Products();
+        Category category= new Category();
+        Product expectedProduct = new Product();
         expectedProduct.setCategory(category);
         expectedProduct.setId(1L);
 
-        ProductDto productDtoExpected= CommonlyUsedMethods.convertProductToProductDto(expectedProduct);
+        ProductDto productDtoExpected= ProductDto.mapProductToProductDto(expectedProduct);
 
-        when(productService.addNewProduct(any(Products.class))).thenReturn(expectedProduct);
+        when(productService.addNewProduct(any(Product.class))).thenReturn(expectedProduct);
 
         ResponseEntity<ProductDto> productDtoResponseEntity= productController.addNewProduct(productToCreate);
         assertNotNull(productDtoResponseEntity);

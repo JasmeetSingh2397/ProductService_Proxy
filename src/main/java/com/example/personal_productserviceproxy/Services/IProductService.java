@@ -1,18 +1,19 @@
 package com.example.personal_productserviceproxy.Services;
 
-import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Models.Products;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
+import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
+import com.example.personal_productserviceproxy.Models.Product;
 
 import java.util.List;
 
 public interface IProductService {
-    public List<Products> getAllProducts();
-    public Products getSingleProduct(Long ProductId);
-    public Products updateProduct(Long ProductId,Products product);
-    public Products addNewProduct(Products product);
-    public Products deleteProduct(Long ProductId);
+    public List<Product> getAllProducts() throws NoProductsFoundException;
+    public Product getSingleProduct(Long ProductId) throws ProductNotFoundException;
+    public Product updateProduct(Long ProductId, Product product) throws ProductNotFoundException;
+    public Product addNewProduct(Product product);
+    public Product deleteProduct(Long ProductId) throws ProductNotFoundException;
 
-    public Products replaceProduct(Long ProductId, Products product);
+    public Product replaceProduct(Long ProductId, Product product) throws ProductNotFoundException;
 
 
 

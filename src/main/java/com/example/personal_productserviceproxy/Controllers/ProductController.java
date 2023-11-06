@@ -1,10 +1,9 @@
 package com.example.personal_productserviceproxy.Controllers;
 
-import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
-import com.example.personal_productserviceproxy.Services.FakeStoreProductService;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
+import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
+import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.IProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +25,12 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<ProductDto>> getAllProducts(){
+    public ResponseEntity<List<ProductDto>> getAllProducts() throws NoProductsFoundException {
 
-        List<Products> products= productService.getAllProducts();
+        List<Product> products= productService.getAllProducts();
         List<ProductDto> productDtos= new ArrayList<>();
-        for(Products product: products){
-            productDtos.add(CommonlyUsedMethods.convertProductToProductDto(product));
+        for(Product product: products){
+            productDtos.add(ProductDto.mapProductToProductDto(product));
 
         }
 
@@ -40,17 +39,17 @@ public class ProductController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getSingleProduct(@PathVariable("id") Long ProductId){
+    public ResponseEntity<ProductDto> getSingleProduct(@PathVariable("id") Long ProductId) throws ProductNotFoundException {
 
         MultiValueMap<String, String> headers= new LinkedMultiValueMap<>();
         headers.add("Accept", "application/json");
         headers.add("Content-Type", "application/json");
         headers.add("auth-token", "heyaccess");
-        Products product= productService.getSingleProduct(ProductId);
+        Product product= productService.getSingleProduct(ProductId);
         if(ProductId<1){
             throw new IllegalArgumentException("Something went wrong");
         }
-        return new ResponseEntity<>(CommonlyUsedMethods.convertProductToProductDto(product),headers, HttpStatus.OK);
+        return new ResponseEntity<>(ProductDto.mapProductToProductDto(product),headers, HttpStatus.OK);
 
     }
 
@@ -59,38 +58,37 @@ public class ProductController {
     @PostMapping()
     public ResponseEntity<ProductDto> addNewProduct(@RequestBody ProductDto productDto){
 
-        Products newProduct= productService.addNewProduct(CommonlyUsedMethods.convertProductDtoToProduct(productDto));
-        ProductDto newProductDto= CommonlyUsedMethods.convertProductToProductDto(newProduct);
+        Product newProduct= productService.addNewProduct(Product.mapProductDtoToProduct(productDto));
+        ProductDto newProductDto= ProductDto.mapProductToProductDto(newProduct);
 
-        ResponseEntity<ProductDto> responseEntity= new ResponseEntity<>(newProductDto, HttpStatus.OK);
-        return responseEntity;
+        return new ResponseEntity<>(newProductDto, HttpStatus.OK);
 
 
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProductDto> patchProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto){
-        Products product = CommonlyUsedMethods.convertProductDtoToProduct(productDto);
+    public ResponseEntity<ProductDto> patchProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto) throws ProductNotFoundException {
+        Product product = Product.mapProductDtoToProduct(productDto);
         productService.updateProduct(productId, product);
-        ProductDto updatedProductDto= CommonlyUsedMethods.convertProductToProductDto(product);
+        ProductDto updatedProductDto= ProductDto.mapProductToProductDto(product);
 
         return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> putProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto){
-        Products product = CommonlyUsedMethods.convertProductDtoToProduct(productDto);
+    public ResponseEntity<ProductDto> putProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto) throws ProductNotFoundException {
+        Product product = Product.mapProductDtoToProduct(productDto);
         productService.replaceProduct(productId, product);
-        ProductDto replacedProductDto= CommonlyUsedMethods.convertProductToProductDto(product);
+        ProductDto replacedProductDto= ProductDto.mapProductToProductDto(product);
 
         return new ResponseEntity<>(replacedProductDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProductDto> deleteProduct(@PathVariable("id") Long productId){
+    public ResponseEntity<ProductDto> deleteProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
 
-        Products product= productService.deleteProduct(productId);
-        return new ResponseEntity<>(CommonlyUsedMethods.convertProductToProductDto(product), HttpStatus.OK);
+        Product product= productService.deleteProduct(productId);
+        return new ResponseEntity<>(ProductDto.mapProductToProductDto(product), HttpStatus.OK);
     }
 
 }

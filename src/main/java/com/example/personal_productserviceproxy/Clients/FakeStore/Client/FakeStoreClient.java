@@ -1,11 +1,6 @@
 package com.example.personal_productserviceproxy.Clients.FakeStore.Client;
 
-import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreCategoryDTO;
 import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreProductDTO;
-import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Models.Products;
-import com.example.personal_productserviceproxy.Services.FakeStoreProductService;
-import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

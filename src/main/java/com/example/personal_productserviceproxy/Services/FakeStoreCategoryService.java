@@ -1,12 +1,9 @@
 package com.example.personal_productserviceproxy.Services;
 
 import com.example.personal_productserviceproxy.Clients.FakeStore.Client.FakeStoreClient;
-import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreCategoryDTO;
 import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreProductDTO;
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.example.personal_productserviceproxy.Models.Category;
+import com.example.personal_productserviceproxy.Models.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +18,11 @@ public class FakeStoreCategoryService implements IProductCategoryService{
         this.fakeStoreClient = fakeStoreClient;
     }
     
-    public List<Categories> getAllProductCategories(){
+    public List<Category> getAllProductCategories(){
         List<String> fakeStoreCategoryDTOlist= fakeStoreClient.getAllProductCategories();
-        List<Categories> categoryList= new ArrayList<>();
+        List<Category> categoryList= new ArrayList<>();
         for(String fakeStoreCategoryDTO: fakeStoreCategoryDTOlist){
-            Categories category= new Categories();
+            Category category= new Category();
             category.setName(fakeStoreCategoryDTO);
             categoryList.add(category);
         }
@@ -35,22 +32,22 @@ public class FakeStoreCategoryService implements IProductCategoryService{
 
 
     @Override
-    public List<Products> getProductsInASingleCategory(String categoryName) {
+    public List<Product> getProductsInASingleCategory(String categoryName) {
         List<FakeStoreProductDTO> fakeStoreProductDTOList= fakeStoreClient.getProductsInASingleCategory(categoryName);
-        List<Products> productsList= new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         for(FakeStoreProductDTO fakeStoreProductDTO: fakeStoreProductDTOList){
-            Products products= new Products();
-            products.setId(fakeStoreProductDTO.getId());
-            products.setTitle(fakeStoreProductDTO.getTitle());
-            products.setPrice(fakeStoreProductDTO.getPrice());
-            products.setDescription(fakeStoreProductDTO.getDescription());
-            products.setImageUrl(fakeStoreProductDTO.getImageUrl());
-            Categories category= new Categories();
+            Product product = new Product();
+            product.setId(fakeStoreProductDTO.getId());
+            product.setTitle(fakeStoreProductDTO.getTitle());
+            product.setPrice(fakeStoreProductDTO.getPrice());
+            product.setDescription(fakeStoreProductDTO.getDescription());
+            product.setImageUrl(fakeStoreProductDTO.getImageUrl());
+            Category category= new Category();
             category.setName(fakeStoreProductDTO.getCategory());
-            products.setCategory(category);
-            productsList.add(products);
+            product.setCategory(category);
+            productList.add(product);
         }
-        return productsList;
+        return productList;
     }
 
 

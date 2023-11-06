@@ -1,9 +1,8 @@
 package com.example.personal_productserviceproxy.Controllers;
 
-import com.example.personal_productserviceproxy.CommonlyUsedMethods;
 import com.example.personal_productserviceproxy.DTOs.CategoryDTO;
 
-import com.example.personal_productserviceproxy.Models.Categories;
+import com.example.personal_productserviceproxy.Models.Category;
 
 import com.example.personal_productserviceproxy.Services.IProductCategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,13 +33,13 @@ public class CategoryControllerTest {
 
     @Test
     void test_whengetAllCategoriesCalled_thenReturnCategoryDtoList() throws Exception {
-        List<Categories> categoriesList= new ArrayList<>();
-        Categories category= new Categories();
+        List<Category> categoryList = new ArrayList<>();
+        Category category= new Category();
         category.setName("Electronics");
         category.setId(1L);
-        categoriesList.add(category);
+        categoryList.add(category);
 
-        when(productCategoryService.getAllProductCategories()).thenReturn(categoriesList);
+        when(productCategoryService.getAllProductCategories()).thenReturn(categoryList);
         List<CategoryDTO> categoryDTOList= categoryController.getAllProductCategories().getBody();
         assertNotNull(categoryDTOList);
 

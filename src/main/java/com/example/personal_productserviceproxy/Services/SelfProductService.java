@@ -1,9 +1,9 @@
 package com.example.personal_productserviceproxy.Services;
 
-import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Models.Categories;
-import com.example.personal_productserviceproxy.Models.Products;
-import com.example.personal_productserviceproxy.Repositories.CategoryRepository;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
+import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
+import com.example.personal_productserviceproxy.Models.Category;
+import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,27 +22,27 @@ public class SelfProductService implements IProductService{
     }
 
     @Override
-    public List<Products> getAllProducts() {
+    public List<Product> getAllProducts() throws NoProductsFoundException {
         if(productRepository.findAll().isEmpty()){
-            throw new NullPointerException("No Products Found");
+            throw new NoProductsFoundException("No Products Found");
         }
 
         return productRepository.findAll();
     }
 
     @Override
-    public Products getSingleProduct(Long ProductId) {
-        Optional<Products> optionalproduct= productRepository.findById(ProductId);
+    public Product getSingleProduct(Long ProductId) throws ProductNotFoundException {
+        Optional<Product> optionalproduct= productRepository.findById(ProductId);
         if (optionalproduct.isEmpty()){
-            throw new NullPointerException("Product with specified id Not Found");
+            throw new ProductNotFoundException("Product with specified id Not Found");
         }
         return optionalproduct.get();
     }
 
     @Override
-    public Products replaceProduct(Long ProductId, Products product){
+    public Product replaceProduct(Long ProductId, Product product) throws ProductNotFoundException {
         if(!productRepository.existsById(ProductId)){
-            throw new NullPointerException("Product with specified id Not Found");
+            throw new ProductNotFoundException("Product with specified id Not Found");
         }
         checkifCategoryNameExists(product);
         product.setId(ProductId);
@@ -50,23 +50,23 @@ public class SelfProductService implements IProductService{
     }
 
     @Override
-    public Products updateProduct(Long ProductId, Products product) {
+    public Product updateProduct(Long ProductId, Product product) throws ProductNotFoundException {
         if(!productRepository.existsById(ProductId)){
-            throw new NullPointerException("Product with specified id Not Found");
+            throw new ProductNotFoundException("Product with specified id Not Found");
         }
         checkifCategoryNameExists(product);
         product.setId(ProductId);
         return productRepository.save(product);
     }
 
-    private void checkifCategoryNameExists(Products product) {
-        Categories category= product.getCategory();
-        Optional<Categories> Optionalcategory= selfProductCategoryService.findByName(category.getName());
+    private void checkifCategoryNameExists(Product product) {
+        Category category= product.getCategory();
+        Optional<Category> Optionalcategory= selfProductCategoryService.findByName(category.getName());
         if(Optionalcategory.isPresent()){
             product.setCategory(Optionalcategory.get());
         }
         else{
-            Categories savedCategory= selfProductCategoryService.save(category);
+            Category savedCategory= selfProductCategoryService.save(category);
             product.setCategory(savedCategory);
 
         }
@@ -74,17 +74,17 @@ public class SelfProductService implements IProductService{
 
 
     @Override
-    public Products addNewProduct(Products product) {
+    public Product addNewProduct(Product product) {
         checkifCategoryNameExists(product);
         return productRepository.save(product);
     }
 
 
     @Override
-    public Products deleteProduct(Long ProductId) {
-        Optional<Products> Optionalproduct = productRepository.findById(ProductId);
+    public Product deleteProduct(Long ProductId) throws ProductNotFoundException {
+        Optional<Product> Optionalproduct = productRepository.findById(ProductId);
         if(Optionalproduct.isEmpty()){
-            throw new NullPointerException("Product with specified id Not Found");
+            throw new ProductNotFoundException("Product with specified id Not Found");
         }
         productRepository.deleteById(ProductId);
         return Optionalproduct.get();
