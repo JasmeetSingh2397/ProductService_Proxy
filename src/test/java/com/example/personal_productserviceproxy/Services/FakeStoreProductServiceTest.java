@@ -5,6 +5,7 @@ import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreP
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
@@ -12,9 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class FakeStoreProductServiceTest {
-    @Autowired
+    @MockBean
     private FakeStoreClient fakeStoreClient;
 
+    private FakeStoreProductService fakeStoreProductService;
 
     @Test
     public void Test_FakeStoreClient() {

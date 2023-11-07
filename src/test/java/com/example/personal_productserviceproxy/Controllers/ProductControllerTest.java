@@ -4,6 +4,7 @@ import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
+import com.example.personal_productserviceproxy.Services.IProductService;
 import com.example.personal_productserviceproxy.Services.SelfProductService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -23,16 +24,14 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class ProductControllerTest {
-//    @MockBean
-//    IProductService productService;
+    @MockBean
+    IProductService productService;
 
     @Autowired
     ProductController productController;
     @Captor
     private ArgumentCaptor<Long> idCaptor;
 
-    @MockBean
-    SelfProductService productService;
 
 
     @Test

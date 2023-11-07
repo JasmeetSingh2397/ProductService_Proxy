@@ -44,7 +44,7 @@ public class SelfProductService implements IProductService{
         if(!productRepository.existsById(ProductId)){
             throw new ProductNotFoundException("Product with specified id Not Found");
         }
-        checkifCategoryNameExists(product);
+        setTheCategoryIfItExistsElseSetNewCategory(product);
         product.setId(ProductId);
         return productRepository.save(product);
     }
@@ -54,12 +54,12 @@ public class SelfProductService implements IProductService{
         if(!productRepository.existsById(ProductId)){
             throw new ProductNotFoundException("Product with specified id Not Found");
         }
-        checkifCategoryNameExists(product);
+        setTheCategoryIfItExistsElseSetNewCategory(product);
         product.setId(ProductId);
         return productRepository.save(product);
     }
 
-    private void checkifCategoryNameExists(Product product) {
+    private void setTheCategoryIfItExistsElseSetNewCategory(Product product) {
         Category category= product.getCategory();
         Optional<Category> Optionalcategory= selfProductCategoryService.findByName(category.getName());
         if(Optionalcategory.isPresent()){
@@ -75,7 +75,7 @@ public class SelfProductService implements IProductService{
 
     @Override
     public Product addNewProduct(Product product) {
-        checkifCategoryNameExists(product);
+        setTheCategoryIfItExistsElseSetNewCategory(product);
         return productRepository.save(product);
     }
 

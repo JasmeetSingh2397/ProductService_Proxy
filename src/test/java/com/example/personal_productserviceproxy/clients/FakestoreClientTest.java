@@ -20,7 +20,8 @@ public class FakestoreClientTest {
     @Test
     void TEST_NON_EXISTING_PRODUCT_RETURNS_NULL(){
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDTO> response= restTemplate.getForEntity("https://fakestoreapi.com/products/{id}", FakeStoreProductDTO.class,0);
+        ResponseEntity<FakeStoreProductDTO> response= restTemplate.
+                getForEntity("https://fakestoreapi.com/products/{id}", FakeStoreProductDTO.class,0);
         FakeStoreProductDTO fakeStoreProductDTO = response.getBody();
 
         assertNull(fakeStoreProductDTO);

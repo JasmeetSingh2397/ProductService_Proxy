@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpServerErrorException;
 
 @ControllerAdvice
 public class ExceptionAdvices {
@@ -44,6 +45,14 @@ public class ExceptionAdvices {
 
         return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
     }
+
+//    @ExceptionHandler({HttpServerErrorException.InternalServerError.class})
+//    public ResponseEntity<String> handleInternalServerErrorException(HttpServerErrorException.InternalServerError e) {
+//
+//        return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+//    }
+//
+
 
 
 

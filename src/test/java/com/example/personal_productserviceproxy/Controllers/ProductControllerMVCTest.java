@@ -69,7 +69,7 @@ public class ProductControllerMVCTest {
 //    @Test
 //    void test_whenGetAllProductsIsCalled_thenThrowInternalServerException() throws Exception {
 //
-//        when(productService.getAllProducts()).thenThrow(new HttpServerErrorException.InternalServerError.class("No Products Found"));
+//        when(productService.getAllProducts()).thenThrow(new HttpServerErrorException("No Products Found");
 //        mockMvc.perform(get("/products"))
 //                .andExpect(status().isOk())
 //                .andExpect(content().string("No Products Found"));
