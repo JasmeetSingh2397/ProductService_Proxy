@@ -1,6 +1,5 @@
 package com.example.personal_productserviceproxy.Services;
 
-import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 public class SelfProductService implements IProductService{
 
     private ProductRepository productRepository;
@@ -22,10 +21,7 @@ public class SelfProductService implements IProductService{
     }
 
     @Override
-    public List<Product> getAllProducts() throws NoProductsFoundException {
-        if(productRepository.findAll().isEmpty()){
-            throw new NoProductsFoundException("No Products Found");
-        }
+    public List<Product> getAllProducts() {
 
         return productRepository.findAll();
     }
@@ -33,9 +29,10 @@ public class SelfProductService implements IProductService{
     @Override
     public Product getSingleProduct(Long ProductId) throws ProductNotFoundException {
         Optional<Product> optionalproduct= productRepository.findById(ProductId);
-        if (optionalproduct.isEmpty()){
+        if(optionalproduct.isEmpty()){
             throw new ProductNotFoundException("Product with specified id Not Found");
         }
+
         return optionalproduct.get();
     }
 

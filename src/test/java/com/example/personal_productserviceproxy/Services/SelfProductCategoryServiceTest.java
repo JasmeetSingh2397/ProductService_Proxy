@@ -1,8 +1,6 @@
 package com.example.personal_productserviceproxy.Services;
 
 import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundException;
-import com.example.personal_productserviceproxy.Exceptions.NoCategoriesFoundException;
-import com.example.personal_productserviceproxy.Exceptions.NoProductsInCategoryException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Repositories.CategoryRepository;
@@ -28,7 +26,7 @@ public class SelfProductCategoryServiceTest {
     private SelfProductCategoryService selfProductCategoryService;
 
     @Test
-    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnTheCorrectCategoryList() throws NoCategoriesFoundException {
+    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnTheCorrectCategoryList(){
         List<Category> categoryList = new ArrayList<>();
         Category category = new Category();
         category.setId(1L);
@@ -46,14 +44,18 @@ public class SelfProductCategoryServiceTest {
     }
 
     @Test
-    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnNoCategoriesFoundException() throws NoCategoriesFoundException {
+    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnEmptyList() {
 
         when(categoryRepository.findAll()).thenReturn(new ArrayList<>());
-        assertThrows(NoCategoriesFoundException.class, () -> selfProductCategoryService.getAllProductCategories());
+
+        List<Category> actualCategoryList = selfProductCategoryService.getAllProductCategories();
+
+        assert(actualCategoryList.isEmpty());
+
     }
 
     @Test
-    public void test_whenGetProductsInSingleCategoryIsCalled_ThenReturnTheCorrectProductList() throws NoProductsInCategoryException, CategoryNotFoundException {
+    public void test_whenGetProductsInSingleCategoryIsCalled_ThenReturnTheCorrectProductList() throws CategoryNotFoundException {
         List<Product> productList = new ArrayList<>();
         Product product = new Product();
         product.setId(1L);
@@ -78,15 +80,16 @@ public class SelfProductCategoryServiceTest {
 
 
     @Test
-    public void test_whenGetProductsInSingleCategoryIsCalled_ThenThrowNoProductsInCategoryException() {
+    public void test_whenGetProductsInSingleCategoryIsCalled_ThenReturnEmptyList() throws CategoryNotFoundException {
 
         Category category = new Category();
         category.setName("Electronics");
         when(categoryRepository.findByName("Electronics")).thenReturn(java.util.Optional.of(category));
         when(categoryRepository.findAllProductsByCategory(category.getId())).thenReturn(new ArrayList<>());
 
-        assertThrows(NoProductsInCategoryException.class, () ->
-                selfProductCategoryService.getProductsInASingleCategory("Electronics"));
+        List<Product> returnedProductList = selfProductCategoryService.getProductsInASingleCategory("Electronics");
+
+        assert(returnedProductList.isEmpty());
 
 
 

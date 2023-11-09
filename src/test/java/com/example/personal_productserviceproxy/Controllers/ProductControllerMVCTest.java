@@ -1,7 +1,6 @@
 package com.example.personal_productserviceproxy.Controllers;
 
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
@@ -13,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,12 +56,12 @@ public class ProductControllerMVCTest {
 
 
     @Test
-    void test_whenGetAllProductsIsCalled_thenThrowNoProductsFoundException() throws Exception {
+    void test_whenGetAllProductsIsCalled_thenReturnStatusNoContent() throws Exception {
 
-        when(productService.getAllProducts()).thenThrow(new NoProductsFoundException("No Products Found"));
+        when(productService.getAllProducts()).thenReturn(new ArrayList<>());
         mockMvc.perform(get("/products"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("No Products Found"));
+                .andExpect(status().isNoContent());
+
     }
 
 //    @Test
@@ -218,7 +216,7 @@ public class ProductControllerMVCTest {
 
 
     @Test
-    void test_whenAddnewProductIsCalled_thenReturnCorrectProductDto() throws Exception {
+    void test_whenAddNewProductIsCalled_thenReturnCorrectProductDto() throws Exception {
         ProductDto productToCreate = new ProductDto();
         productToCreate.setTitle("Nikhil");
 

@@ -3,11 +3,8 @@ package com.example.personal_productserviceproxy.Services;
 import com.example.personal_productserviceproxy.Clients.FakeStore.Client.FakeStoreClient;
 import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreProductDTO;
 import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundException;
-import com.example.personal_productserviceproxy.Exceptions.NoCategoriesFoundException;
-import com.example.personal_productserviceproxy.Exceptions.NoProductsInCategoryException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
-import com.example.personal_productserviceproxy.Repositories.CategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -30,8 +28,7 @@ public class FakeStoreCategoryServiceTest {
     private FakeStoreCategoryService fakeStoreCategoryService;
 
     @Test
-    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnTheCorrectCategoryList()
-            throws NoCategoriesFoundException {
+    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnTheCorrectCategoryList() {
         List<String> fakeStoreCategoryDTOlist = new ArrayList<>();
 
         fakeStoreCategoryDTOlist.add("Electronics");
@@ -45,14 +42,18 @@ public class FakeStoreCategoryServiceTest {
     }
 
     @Test
-    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnNoCategoriesFoundException() {
+    public void test_whenGetAllProductCategoriesIsCalled_ThenReturnEmptyList() {
 
         when(fakeStoreClient.getAllProductCategories()).thenReturn(new ArrayList<>());
-        assertThrows(NoCategoriesFoundException.class, () -> fakeStoreCategoryService.getAllProductCategories());
+
+        List<Category> returnedCategoryList = fakeStoreCategoryService.getAllProductCategories();
+
+        assert(returnedCategoryList.isEmpty());
+
     }
 
     @Test
-    public void test_whenGetProductsInSingleCategoryIsCalled_ThenReturnTheCorrectProductList() throws NoProductsInCategoryException, CategoryNotFoundException {
+    public void test_whenGetProductsInSingleCategoryIsCalled_ThenReturnTheCorrectProductList() throws CategoryNotFoundException {
 
         List<FakeStoreProductDTO> fakeStoreProductDTOList = new ArrayList<>();
         FakeStoreProductDTO fakeStoreProductDTO = new FakeStoreProductDTO();
@@ -74,26 +75,30 @@ public class FakeStoreCategoryServiceTest {
     }
 
 
-//    @Test
-//    public void test_whenGetProductsInSingleCategoryIsCalled_ThenThrowNoProductsInCategoryException() {
-//
-//        when(fakeStoreClient.getProductsInASingleCategory("Electronics")).thenReturn(new ArrayList<>());
-//
-//        assertThrows(NoProductsInCategoryException.class, () ->
-//                fakeStoreCategoryService.getProductsInASingleCategory("Electronics"));
-//
-//    }
-
     @Test
-    public void test_whenGetProductsInSingleCategoryIsCalled_ThenThrowCategoryNotFoundException() {
+    public void test_whenGetProductsInSingleCategoryIsCalled_ThenReturnEmptyProductList() throws CategoryNotFoundException {
 
-        when(fakeStoreClient.getProductsInASingleCategory("Electronics")).thenReturn(null);
+        when(fakeStoreClient.getProductsInASingleCategory(anyString())).thenReturn(new ArrayList<>());
 
-        assertThrows(CategoryNotFoundException.class, () ->
-                fakeStoreCategoryService.getProductsInASingleCategory("Electronics"));
+        List<Product> returnedProductList = fakeStoreCategoryService.
+                getProductsInASingleCategory("Electronics");
+
+        assert(returnedProductList.isEmpty());
+
 
 
     }
+
+//    @Test
+//    public void test_whenGetProductsInSingleCategoryIsCalled_ThenThrowCategoryNotFoundException() {
+//
+//        when(fakeStoreClient.getProductsInASingleCategory("Electronics")).thenReturn(null);
+//
+//        assertThrows(CategoryNotFoundException.class, () ->
+//                fakeStoreCategoryService.getProductsInASingleCategory("Electronics"));
+//
+//
+//    }
 
 
 }

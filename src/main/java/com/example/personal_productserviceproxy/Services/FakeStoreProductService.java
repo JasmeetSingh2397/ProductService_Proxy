@@ -2,17 +2,15 @@ package com.example.personal_productserviceproxy.Services;
 
 import com.example.personal_productserviceproxy.Clients.FakeStore.Client.FakeStoreClient;
 import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreProductDTO;
-import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@Service
+@Service
 
 public class FakeStoreProductService implements IProductService{
 
@@ -38,13 +36,10 @@ public class FakeStoreProductService implements IProductService{
         return product;
     }
     @Override
-    public List<Product> getAllProducts() throws NoProductsFoundException {
+    public List<Product> getAllProducts() {
 
 
         List<FakeStoreProductDTO> fakestoreproductDtos= fakeStoreClient.getAllProducts();
-        if(fakestoreproductDtos.isEmpty()){
-            throw new NoProductsFoundException("No Products Found");
-        }
         List<Product> products= new ArrayList<>();
         for(FakeStoreProductDTO fakeStoreproductDto: fakestoreproductDtos){
             products.add(getProduct(fakeStoreproductDto));
@@ -54,35 +49,27 @@ public class FakeStoreProductService implements IProductService{
 
     @Override
     public Product getSingleProduct(Long productId) throws ProductNotFoundException {
-      try {
+
             FakeStoreProductDTO fakeStoreProductDTO = fakeStoreClient.getSingleProduct(productId);
-            return getProduct(fakeStoreProductDTO);
-        } catch (Exception e) {
-            if( e instanceof  RestClientException){
-                throw new RestClientException("An error occurred while fetching data. Please try again later.");
-            }
-            else {
+            if (fakeStoreProductDTO == null) {
                 throw new ProductNotFoundException("Product with specified id Not Found");
             }
-        }
-
+            return getProduct(fakeStoreProductDTO);
     }
 
     @Override
     public Product updateProduct(Long ProductId, Product product) throws ProductNotFoundException {
-
-        try {
-            FakeStoreProductDTO fakeStoreProductDTO = fakeStoreClient.updateProduct(ProductId,
-                    getFakeStoreProductDTOfromProduct(product));
-            return getProduct(fakeStoreProductDTO);
-        } catch (Exception e) {
-            if( e instanceof  RestClientException){
-                throw new RestClientException("An error occurred while fetching data. Please try again later.");
-            }
-            else {
-                throw new ProductNotFoundException("Product with specified id Not Found");
-            }
+        if (fakeStoreClient.getSingleProduct(ProductId) == null) {
+            throw new ProductNotFoundException("Product with specified id Not Found");
         }
+
+
+        FakeStoreProductDTO fakeStoreProductDTO = fakeStoreClient.updateProduct(ProductId,
+                getFakeStoreProductDTOfromProduct(product));
+
+
+
+        return getProduct(fakeStoreProductDTO);
     }
 
     private FakeStoreProductDTO getFakeStoreProductDTOfromProduct(Product product){
@@ -105,36 +92,30 @@ public class FakeStoreProductService implements IProductService{
     }
 
     @Override
-    public Product deleteProduct(Long ProductId) throws ProductNotFoundException {
+    public Product deleteProduct(Long productId) throws ProductNotFoundException {
 
-        try{
-            FakeStoreProductDTO fakeStoreProductDTO= fakeStoreClient.deleteProduct(ProductId);
-            return getProduct(fakeStoreProductDTO);
-        }catch (Exception e) {
-            if( e instanceof  RestClientException){
-                throw new RestClientException("An error occurred while fetching data. Please try again later.");
-            }
-            else {
-                throw new ProductNotFoundException("Product with specified id Not Found");
-            }
+        FakeStoreProductDTO fakeStoreProductDTO = fakeStoreClient.deleteProduct(productId);
+        if (fakeStoreProductDTO == null) {
+            throw new ProductNotFoundException("Product with specified id Not Found");
         }
+        return getProduct(fakeStoreProductDTO);
     }
+
+
 
     @Override
     public Product replaceProduct(Long ProductId, Product product) throws ProductNotFoundException {
-        try{
 
-            FakeStoreProductDTO fakeStoreProductDTO = fakeStoreClient.replaceProduct(ProductId, getFakeStoreProductDTOfromProduct(product));
-            return getProduct(fakeStoreProductDTO);
-        }catch (Exception e) {
-            if( e instanceof  RestClientException){
-                throw new RestClientException("An error occurred while fetching data. Please try again later.");
-            }
-            else {
-                throw new ProductNotFoundException("Product with specified id Not Found");
-            }
+        if (fakeStoreClient.getSingleProduct(ProductId) == null) {
+            throw new ProductNotFoundException("Product with specified id Not Found");
         }
+        FakeStoreProductDTO fakeStoreProductDTO = fakeStoreClient.replaceProduct(ProductId,
+                getFakeStoreProductDTOfromProduct(product));
 
+
+        return getProduct(fakeStoreProductDTO);
     }
+
 }
+
 

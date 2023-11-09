@@ -1,8 +1,5 @@
 package com.example.personal_productserviceproxy.Services;
 
-import com.example.personal_productserviceproxy.Controllers.ProductController;
-import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
@@ -13,7 +10,6 @@ import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +56,7 @@ public class SelfProductServiceTest {
     }
 
     @Test
-    void test_whenGetAllProductsIsCalled_thenReturnCorrectProductList() throws NoProductsFoundException {
+    void test_whenGetAllProductsIsCalled_thenReturnCorrectProductList(){
         ArrayList<Product> products = new ArrayList<>();
 
 
@@ -71,7 +67,7 @@ public class SelfProductServiceTest {
         products.add(productToCreate);
 
         when(productRepository.findAll()).thenReturn(products);
-       
+
 
         List<Product> expectedProducts= productService.getAllProducts();
         assertNotNull(expectedProducts);
@@ -80,11 +76,13 @@ public class SelfProductServiceTest {
 
 
     @Test
-    void test_whenGetAllProductsIsCalledWithNoRecordsInDB_thenThrowNoProductsFoundException() {
+    void test_whenGetAllProductsIsCalledWithNoRecordsInDB_thenReturnEmptyList() {
 
         when(productRepository.findAll()).thenReturn(new ArrayList<>());
-        assertThrows(ProductNotFoundException.class,
-                ()-> productService.getSingleProduct(2L));
+
+        List<Product> expectedProducts= productService.getAllProducts();
+        assertNotNull(expectedProducts);
+        assertEquals(0, expectedProducts.size());
     }
 
     @Test
@@ -187,7 +185,7 @@ public class SelfProductServiceTest {
     }
 
     @Test
-    void test_whenDeleteProductIsCalled_thenThrowProductNotFoundException() throws Exception {
+    void test_whenDeleteProductIsCalled_thenThrowProductNotFoundException(){
 
         when(productRepository.findById(any(Long.class))).thenReturn(java.util.Optional.empty());
         assertThrows(ProductNotFoundException.class,
@@ -196,7 +194,7 @@ public class SelfProductServiceTest {
 //
 //
     @Test
-    void test_whenAddNewProductIsCalled_thenReturnTheAddedProduct() throws Exception {
+    void test_whenAddNewProductIsCalled_thenReturnTheAddedProduct(){
 
         Category category= new Category();
         category.setName("Electronics");

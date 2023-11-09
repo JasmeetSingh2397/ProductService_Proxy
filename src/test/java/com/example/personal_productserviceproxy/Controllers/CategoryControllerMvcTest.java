@@ -3,8 +3,6 @@ package com.example.personal_productserviceproxy.Controllers;
 import com.example.personal_productserviceproxy.DTOs.CategoryDTO;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundException;
-import com.example.personal_productserviceproxy.Exceptions.NoCategoriesFoundException;
-import com.example.personal_productserviceproxy.Exceptions.NoProductsInCategoryException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.IProductCategoryService;
@@ -55,13 +53,13 @@ public class CategoryControllerMvcTest {
 
 
     @Test
-    void test_whenGetAllCategoriesIsCalled_thenThrowNoCategoriesFoundException() throws Exception {
+    void test_whenGetAllCategoriesIsCalled_thenReturnNoContentStatus() throws Exception {
 
         when(productCategoryService.getAllProductCategories()).
-                thenThrow(new NoCategoriesFoundException("No Categories Found"));
+                thenReturn(new ArrayList<>());
         mockMvc.perform(get("/products/categories"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("No Categories Found"));
+                .andExpect(status().isNoContent());
+
     }
 
     @Test
@@ -87,7 +85,7 @@ public class CategoryControllerMvcTest {
     }
 
     @Test
-    void test_whenGetProductsInASingleCategoryIsCalled_thenThrowCategoryNotFoundException() throws Exception {
+    void test_whenGetProductsInASingleCategoryIsCalled_thenReturnStatusNotFound() throws Exception {
         Category categoryToSearch= new Category();
         categoryToSearch.setName("Electronics");
 
@@ -100,15 +98,15 @@ public class CategoryControllerMvcTest {
     }
 
     @Test
-    void test_whenGetProductsInASingleCategoryIsCalled_thenThrowNoProductsInCategoryException() throws Exception {
+    void test_whenGetProductsInASingleCategoryIsCalled_thenReturnNoContentStatus() throws Exception {
         Category categoryToSearch= new Category();
         categoryToSearch.setName("Electronics");
 
         when(productCategoryService.getProductsInASingleCategory(any(String.class))).
-                thenThrow(new NoProductsInCategoryException("No Products Found in the mentioned Category"));
+                thenReturn(new ArrayList<>());
         mockMvc.perform(
                 get("/products/category/{name}",categoryToSearch.getName()))
-                .andExpect(status().isOk())
-                .andExpect(content().string("No Products Found in the mentioned Category"));
+                .andExpect(status().isNoContent());
+
     }
 }

@@ -14,13 +14,13 @@ public class ExceptionAdvices {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<String> handleException(Exception e) {
 
-        return new ResponseEntity<>("Oops! Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler({CategoryNotFoundException.class})
     public ResponseEntity<String> handleCategoryNotFoundException(CategoryNotFoundException e) {
 
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({ProductNotFoundException.class})
@@ -29,29 +29,10 @@ public class ExceptionAdvices {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler({NoCategoriesFoundException.class})
-    public ResponseEntity<String> handleEmptyCategoryListException(NoCategoriesFoundException e) {
-
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
-    }
-
-    @ExceptionHandler({NoProductsFoundException.class})
-    public ResponseEntity<String> handleEmptyProductListException(NoProductsFoundException e) {
-
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
-    }
-
-    @ExceptionHandler({NoProductsInCategoryException.class})
-    public ResponseEntity<String> handleNoProductsInCategoryException(NoProductsInCategoryException e) {
-
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
-
-    }
-
     @ExceptionHandler({RestClientException.class})
     public ResponseEntity<String> handleRestClientException (RestClientException e) {
 
-        return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 //    @ExceptionHandler({HttpServerErrorException.InternalServerError.class})

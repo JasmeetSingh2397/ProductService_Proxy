@@ -105,6 +105,22 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- MapStruct core library -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.4.2.Final</version> <!-- Replace with the latest version -->
+        </dependency>
+
+        <!-- MapStruct processor (annotation processor) -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.4.2.Final</version> <!-- Replace with the latest version -->
+            <scope>provided</scope>
+        </dependency>
+
+
 
     </dependencies>
 

@@ -2,7 +2,6 @@ package com.example.personal_productserviceproxy.Services;
 
 import com.example.personal_productserviceproxy.Clients.FakeStore.Client.FakeStoreClient;
 import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreProductDTO;
-import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
@@ -54,7 +53,7 @@ public class FakeStoreProductServiceTest {
     }
 
     @Test
-    void test_whenGetAllProductsIsCalled_thenReturnCorrectProductList() throws NoProductsFoundException {
+    void test_whenGetAllProductsIsCalled_thenReturnCorrectProductList(){
         FakeStoreProductDTO fakeStoreProductDTO = new FakeStoreProductDTO();
         fakeStoreProductDTO.setId(1L);
         fakeStoreProductDTO.setTitle("test");
@@ -76,16 +75,17 @@ public class FakeStoreProductServiceTest {
 //
 //
     @Test
-    void test_whenGetAllProductsIsCalled_thenThrowNoProductsFoundException() {
+    void test_whenGetAllProductsIsCalled_thenReturnEmptyList() {
 
         when(fakeStoreClient.getAllProducts()).thenReturn(new ArrayList<>());
 
-        assertThrows(NoProductsFoundException.class,
-                ()-> fakeStoreProductService.getAllProducts());
+        List<Product> expectedProducts= fakeStoreProductService.getAllProducts();
+
+        assert(expectedProducts.isEmpty());
     }
 
     @Test
-    void test_whenReplaceIsProductIsCalled_thenReturnTheReplacedProduct() throws ProductNotFoundException {
+    void test_whenReplaceProductIsCalled_thenReturnTheReplacedProduct() throws ProductNotFoundException {
 
         Long id= 1L;
         Category category= new Category();
@@ -104,6 +104,7 @@ public class FakeStoreProductServiceTest {
 
         when(fakeStoreClient.replaceProduct(any(Long.class), any(FakeStoreProductDTO.class))).
                 thenReturn(fakeStoreProductDTO);
+        when(fakeStoreClient.getSingleProduct(any(Long.class))).thenReturn(fakeStoreProductDTO);
 
         Product replacedProduct = fakeStoreProductService.replaceProduct(id, productToReplaceWith);
         assertNotNull(replacedProduct);
@@ -124,6 +125,7 @@ public class FakeStoreProductServiceTest {
 
         when(fakeStoreClient.replaceProduct(any(Long.class), any(FakeStoreProductDTO.class))).
                 thenReturn(null);
+        when(fakeStoreClient.getSingleProduct(any(Long.class))).thenReturn(null);
 
         assertThrows(ProductNotFoundException.class,
                 ()-> fakeStoreProductService.replaceProduct(2L, productToReplaceWith));
@@ -149,6 +151,8 @@ public class FakeStoreProductServiceTest {
         when(fakeStoreClient.updateProduct(any(Long.class), any(FakeStoreProductDTO.class))).
                 thenReturn(fakeStoreProductDTO);
 
+        when(fakeStoreClient.getSingleProduct(any(Long.class))).thenReturn(fakeStoreProductDTO);
+
         Product updatedProduct = fakeStoreProductService.updateProduct(id, productToUpdateWith);
         assertNotNull(updatedProduct);
         assertEquals(productToUpdateWith.getId(), updatedProduct.getId());
@@ -157,7 +161,7 @@ public class FakeStoreProductServiceTest {
 
 
     @Test
-    void test_whenUpdateProductCalled_thenThrowProductNotFoundException() {
+    void test_whenUpdateProductIsCalled_thenThrowProductNotFoundException() {
         Long id= 1L;
         Category category= new Category();
         category.setName("Electronics");
@@ -167,6 +171,7 @@ public class FakeStoreProductServiceTest {
 
         when(fakeStoreClient.updateProduct(any(Long.class), any(FakeStoreProductDTO.class))).
                 thenReturn(null);
+        when(fakeStoreClient.getSingleProduct(any(Long.class))).thenReturn(null);
 
         assertThrows(ProductNotFoundException.class,
                 ()-> fakeStoreProductService.updateProduct(2L, productToUpdateWith));
@@ -185,6 +190,7 @@ public class FakeStoreProductServiceTest {
 
         when(fakeStoreClient.deleteProduct(any(Long.class))).thenReturn(fakeStoreProductDTO);
 
+
         Product deletedProduct = fakeStoreProductService.deleteProduct(1L);
         assertNotNull(deletedProduct);
         assertEquals(1L, deletedProduct.getId());
@@ -201,7 +207,7 @@ public class FakeStoreProductServiceTest {
 
 
     @Test
-    void test_whenAddNewProductIsCalled_thenReturnTheAddedProduct() throws Exception {
+    void test_whenAddNewProductIsCalled_thenReturnTheAddedProduct(){
 
         Category category= new Category();
         category.setName("Electronics");
