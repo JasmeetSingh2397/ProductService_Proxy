@@ -2,6 +2,7 @@ package com.example.personal_productserviceproxy.Services;
 
 import com.example.personal_productserviceproxy.Controllers.ProductController;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
+import com.example.personal_productserviceproxy.Exceptions.NoProductsFoundException;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
@@ -51,7 +52,7 @@ public class SelfProductServiceTest {
     }
 
     @Test
-    public void test_whengetSingleProductIsCalled_thenThrowProductNotFoundException(){
+    public void test_whenGetSingleProductIsCalled_thenThrowProductNotFoundException(){
         when(productRepository.findById(any(Long.class))).thenReturn(java.util.Optional.empty());
         assertThrows(ProductNotFoundException.class,
                 ()-> productService.getSingleProduct(2L));
@@ -59,7 +60,7 @@ public class SelfProductServiceTest {
     }
 
     @Test
-    void test_whenGetAllProductsIsCalled_thenReturnCorrectProductList() throws Exception {
+    void test_whenGetAllProductsIsCalled_thenReturnCorrectProductList() throws NoProductsFoundException {
         ArrayList<Product> products = new ArrayList<>();
 
 
@@ -79,7 +80,7 @@ public class SelfProductServiceTest {
 
 
     @Test
-    void test_whenGetAllProductsIsCalledWithNoRecordsInDB_thenThrowNoProductsFoundException() throws Exception {
+    void test_whenGetAllProductsIsCalledWithNoRecordsInDB_thenThrowNoProductsFoundException() {
 
         when(productRepository.findAll()).thenReturn(new ArrayList<>());
         assertThrows(ProductNotFoundException.class,
@@ -87,7 +88,7 @@ public class SelfProductServiceTest {
     }
 
     @Test
-    void test_whenReplaceIsProductIsCalled_thenReturnTheReplacedProduct() throws Exception {
+    void test_whenReplaceIsProductIsCalled_thenReturnTheReplacedProduct() throws ProductNotFoundException {
         Long id= 1L;
         Category category= new Category();
         category.setName("Electronics");
@@ -112,7 +113,7 @@ public class SelfProductServiceTest {
 
 
         @Test
-    void test_whenReplaceProductIsCalled_thenThrowProductNotFoundException() throws Exception {
+    void test_whenReplaceProductIsCalled_thenThrowProductNotFoundException() {
         Long id= 1L;
         Category category= new Category();
         category.setName("Electronics");
@@ -127,7 +128,7 @@ public class SelfProductServiceTest {
     }
 
     @Test
-    void test_whenReplaceProductIsCalled_thenReturnCorrectProduct() throws Exception {
+    void test_whenUpdateProductIsCalled_thenReturnCorrectProduct() throws ProductNotFoundException {
         Long id= 1L;
         Category category= new Category();
         category.setName("Electronics");
@@ -152,7 +153,7 @@ public class SelfProductServiceTest {
 
 
     @Test
-    void test_whenpatchProductCalled_thenThrowException() throws Exception {
+    void test_whenUpdateProductCalled_thenThrowProductNotFoundException(){
         Long id= 1L;
         Category category= new Category();
         category.setName("Electronics");
@@ -167,7 +168,7 @@ public class SelfProductServiceTest {
     }
 
     @Test
-    void test_whenDeleteProductIsCalled_thenReturnTheDeletedProduct() throws Exception {
+    void test_whenDeleteProductIsCalled_thenReturnTheDeletedProduct() throws ProductNotFoundException {
 
         Product product= new Product();
         product.setId(2L);

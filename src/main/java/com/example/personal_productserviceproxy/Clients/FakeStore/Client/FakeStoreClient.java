@@ -66,7 +66,7 @@ public class FakeStoreClient {
 
     }
 
-    public FakeStoreProductDTO putProduct(Long ProductId, FakeStoreProductDTO fakeStoreProductDTO) {
+    public FakeStoreProductDTO replaceProduct(Long ProductId, FakeStoreProductDTO fakeStoreProductDTO) {
 //        ResponseEntity<FakeStoreProductDTO> fakeStoreproductDtoResponseEntity= requestForEntity(HttpMethod.PUT,
 //                "https://fakestoreapi.com/products/{id}",
 //                fakeStoreProductDTO,

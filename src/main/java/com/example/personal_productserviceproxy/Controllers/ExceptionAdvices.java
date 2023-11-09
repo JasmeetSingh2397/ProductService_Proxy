@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestClientException;
 
 @ControllerAdvice
 public class ExceptionAdvices {
@@ -44,6 +45,13 @@ public class ExceptionAdvices {
     public ResponseEntity<String> handleNoProductsInCategoryException(NoProductsInCategoryException e) {
 
         return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+
+    }
+
+    @ExceptionHandler({RestClientException.class})
+    public ResponseEntity<String> handleRestClientException (RestClientException e) {
+
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 //    @ExceptionHandler({HttpServerErrorException.InternalServerError.class})
