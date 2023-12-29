@@ -1,4 +1,4 @@
-package security;
+package com.example.personal_productserviceproxy.security;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
