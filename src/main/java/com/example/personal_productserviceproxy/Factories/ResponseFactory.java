@@ -12,7 +12,9 @@ import org.springframework.util.MultiValueMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HTTPStatusFactory {
+public class ResponseFactory {
+
+
 
     public static ResponseEntity<ProductDto> getResponseEntityForPutProduct(Product product){
 
@@ -48,8 +50,22 @@ public class HTTPStatusFactory {
     }
 
 
-    public static ResponseEntity<List<ProductDto>> getResponseEntityForGetAllProducts(List<Product> products){
-
+    public static ResponseEntity<List<ProductDto>> getResponseEntityForGetAllProducts(List<Product> products, String token,Long userId){
+//        if (validateTokenResponseDto.getSessionStatus().equals(SessionStatus.INVALID)){
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
+//
+//        boolean isUserAdmin= false;
+//
+//        for(Role role: validateTokenResponseDto.getUserDto().getRoles()){
+//            if(role.getName().equals("ADMIN")){
+//                isUserAdmin= true;
+//            }
+//        }
+//        if(!isUserAdmin){
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
+//
         if(products.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

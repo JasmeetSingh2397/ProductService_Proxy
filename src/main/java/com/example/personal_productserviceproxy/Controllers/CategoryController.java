@@ -3,7 +3,7 @@ package com.example.personal_productserviceproxy.Controllers;
 import com.example.personal_productserviceproxy.DTOs.CategoryDTO;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundException;
-import com.example.personal_productserviceproxy.Factories.HTTPStatusFactory;
+import com.example.personal_productserviceproxy.Factories.ResponseFactory;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.IProductCategoryService;
@@ -30,13 +30,13 @@ public class CategoryController {
         List<Category> categoryList = ProductcategoryService.getAllProductCategories();
 
 
-        return HTTPStatusFactory.getResponseEntityForGetAllProductCategories(categoryList);
+        return ResponseFactory.getResponseEntityForGetAllProductCategories(categoryList);
     }
     @GetMapping("/category/{categoryName}")
     public ResponseEntity<List<ProductDto>> getProductsInCategory(@PathVariable("categoryName") String categoryName) throws CategoryNotFoundException {
 
         List<Product> productList = ProductcategoryService.getProductsInASingleCategory(categoryName);
-        return HTTPStatusFactory.getResponseEntityForGetProductsInASingleCategory(productList);
+        return ResponseFactory.getResponseEntityForGetProductsInASingleCategory(productList);
     }
 
 }

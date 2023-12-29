@@ -5,36 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73d8c4d6-53ab-4eca-b0a4-55718dcc7c76" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Factories/HTTPStatusFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/client/AuthenticationClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos/SessionStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos/ValidateTokenRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos/ValidateTokenResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/security/CustomJwtAuthenticationConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/security/SpringSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/schema_name.aVrCww.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd1cc7a9-4ba5-4c63-926c-72f81626e413/storage_v2/_src_/schema/test.kkQ2AA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/FakeStore/DTO/FakeStoreProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/FakeStore/DTO/FakeStoreProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/IClientProductDTO.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/CategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/NoCategoriesFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/NoProductsFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Exceptions/NoProductsInCategoryException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/FakeStoreProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/IProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SelfProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/CategoryControllerMvcTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerMVCTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerMVCTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Factories/HTTPStatusFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Factories/ResponseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Controllers/ProductControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/PersonalProductServiceProxyApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/PersonalProductServiceProxyApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/FakeStoreCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/FakeStoreCategoryServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/FakeStoreProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/FakeStoreProductServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/SelfProductCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/SelfProductCategoryServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/SelfProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/personal_productserviceproxy/Services/SelfProductServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/CategoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Clients/FakeStore/DTO/FakeStoreProductDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Clients/FakeStore/DTO/FakeStoreProductDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Clients/IClientProductDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Controllers/ProductController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreCategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/FakeStoreProductService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductCategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/IProductService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductCategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/personal_productserviceproxy/Services/SelfProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/personal_productserviceproxy/PersonalProductServiceProxyApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/personal_productserviceproxy/Services/FakeStoreProductServiceTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +92,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hp/IdeaProjects/Scaler_Case_Studies/BookMyShow&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jasmeetsingh/IdeaProjects/personal_ProductService_Proxy/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -101,12 +112,16 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Clients/authentication/dtos" />
       <recent name="C:\Users\hp\Personal_ProductServiceProxy\src\main\java\com\example\personal_productserviceproxy\InhertitanceExamples\tablePerClass" />
       <recent name="C:\Users\hp\Personal_ProductServiceProxy\src\main\java\com\example\personal_productserviceproxy\InhertitanceExamples\singleClass" />
       <recent name="C:\Users\hp\Personal_ProductServiceProxy\src\main\java\com\example\personal_productserviceproxy\InhertitanceExamples\mappedSuperclass" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.personal_productserviceproxy" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.personal_productserviceproxy.Clients.authentication.dtos" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -241,6 +256,17 @@
       <workItem from="1699466307908" duration="17856000" />
       <workItem from="1699506803251" duration="6507000" />
       <workItem from="1699551884193" duration="12834000" />
+      <workItem from="1702054062566" duration="555000" />
+      <workItem from="1702139588975" duration="1110000" />
+      <workItem from="1703240270065" duration="692000" />
+      <workItem from="1703349075104" duration="2163000" />
+      <workItem from="1703432255651" duration="598000" />
+      <workItem from="1703485862803" duration="4768000" />
+      <workItem from="1703501463884" duration="34000" />
+      <workItem from="1703522749273" duration="611000" />
+      <workItem from="1703605431159" duration="9519000" />
+      <workItem from="1703656863115" duration="1175000" />
+      <workItem from="1703842815202" duration="12383000" />
     </task>
     <servers />
   </component>
