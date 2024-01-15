@@ -1,11 +1,13 @@
 package com.example.personal_productserviceproxy.Controllers;
 
-import com.example.personal_productserviceproxy.Clients.authentication.client.AuthenticationClient;
+import com.example.personal_productserviceproxy.DTOs.SearchProductRequestDto;
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Factories.ResponseFactory;
 import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.IProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +19,13 @@ import java.util.List;
 public class ProductController {
 
     private IProductService productService;
+
     public ProductController(IProductService productService) {
         this.productService = productService;
     }
 
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<ProductDto>> getAllProducts(@Nullable @RequestHeader("AUTH-TOKEN") String token,
                                                            @Nullable @RequestHeader("USER_ID") Long userId) {
 

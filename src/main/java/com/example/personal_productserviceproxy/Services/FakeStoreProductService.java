@@ -5,6 +5,8 @@ import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreP
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,11 +18,14 @@ public class FakeStoreProductService implements IProductService{
 
 
     private FakeStoreClient fakeStoreClient;
+    private RedisTemplate<Long, Object> redisTemplate;
 
 
-    public FakeStoreProductService(FakeStoreClient fakeStoreClient) {
+
+    public FakeStoreProductService(FakeStoreClient fakeStoreClient, RedisTemplate<Long, Object> redisTemplate) {
 
         this.fakeStoreClient= fakeStoreClient;
+        this.redisTemplate = redisTemplate;
     }
 
     private Product getProduct(FakeStoreProductDTO fakestoreproductDto) {
@@ -49,12 +54,17 @@ public class FakeStoreProductService implements IProductService{
 
     @Override
     public Product getSingleProduct(Long productId) throws ProductNotFoundException {
-
-            FakeStoreProductDTO fakeStoreProductDTO = fakeStoreClient.getSingleProduct(productId);
-            if (fakeStoreProductDTO == null) {
-                throw new ProductNotFoundException("Product with specified id Not Found");
-            }
+        FakeStoreProductDTO fakeStoreProductDTO= (FakeStoreProductDTO) redisTemplate.opsForHash().get(productId, "PRODUCTS");
+        if(fakeStoreProductDTO!=null){
             return getProduct(fakeStoreProductDTO);
+        }
+        FakeStoreProductDTO productDto = fakeStoreClient.getSingleProduct(productId);
+
+        if (productDto == null) {
+            throw new ProductNotFoundException("Product with specified id Not Found");
+        }
+        redisTemplate.opsForHash().put(productId, "PRODUCTS", productDto);
+        return getProduct(productDto);
     }
 
     @Override
@@ -115,6 +125,7 @@ public class FakeStoreProductService implements IProductService{
 
         return getProduct(fakeStoreProductDTO);
     }
+
 
 }
 

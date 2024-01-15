@@ -1,23 +1,33 @@
 package com.example.personal_productserviceproxy.Services;
 
+import com.example.personal_productserviceproxy.Clients.FakeStore.DTO.FakeStoreProductDTO;
 import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundException;
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Repositories.ProductRepository;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-//@Service
+@Service
+@Primary
 public class SelfProductService implements IProductService{
 
     private ProductRepository productRepository;
     private SelfProductCategoryService selfProductCategoryService;
 
-    public SelfProductService(ProductRepository productRepository, SelfProductCategoryService selfProductCategoryService) {
+    private RedisTemplate<Long, Object> redisTemplate;
+
+    public SelfProductService(ProductRepository productRepository, SelfProductCategoryService selfProductCategoryService, RedisTemplate<Long, Object> redisTemplate) {
         this.productRepository = productRepository;
         this.selfProductCategoryService = selfProductCategoryService;
+        this.redisTemplate= redisTemplate;
     }
 
     @Override
@@ -26,14 +36,21 @@ public class SelfProductService implements IProductService{
         return productRepository.findAll();
     }
 
+
+
     @Override
     public Product getSingleProduct(Long ProductId) throws ProductNotFoundException {
+        Product product= (Product) redisTemplate.opsForHash().get(ProductId, "PRODUCTS");
+        if(product!=null){
+            return product;
+        }
         Optional<Product> optionalproduct= productRepository.findById(ProductId);
         if(optionalproduct.isEmpty()){
             throw new ProductNotFoundException("Product with specified id Not Found");
         }
-
-        return optionalproduct.get();
+        Product product1= optionalproduct.get();
+        redisTemplate.opsForHash().put(ProductId, "PRODUCTS", product1);
+        return product1;
     }
 
     @Override

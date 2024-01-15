@@ -4,12 +4,14 @@ import com.example.personal_productserviceproxy.Exceptions.CategoryNotFoundExcep
 import com.example.personal_productserviceproxy.Models.Category;
 import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Repositories.CategoryRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-//@Service
+@Service
+@Primary
 public class SelfProductCategoryService implements IProductCategoryService{
 
     private CategoryRepository categoryRepository;

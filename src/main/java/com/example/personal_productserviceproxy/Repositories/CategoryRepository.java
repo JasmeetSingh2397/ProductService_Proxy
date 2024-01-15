@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Repository
+@Repository("jpaCategoryRepository")
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     public Optional<Category> findById(Long id);
 

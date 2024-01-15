@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-//import static org.springframework.security.oauth2.core.authorization.OAuth2AuthorizationManagers.hasScope;
 
 @Configuration
 @EnableWebSecurity
@@ -16,8 +15,9 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/products").hasAuthority("ADMIN")
-                                .anyRequest().authenticated() //only allow a person who has logged in to be able to access any URL
+                                .requestMatchers("/products/").permitAll()
+//                                hasAuthority("ADMIN")
+                                .anyRequest().permitAll() //only allow a person who has logged in to be able to access any URL
 //                                .anyRequest().permitAll() // allow anyone to access any url without needing login
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
@@ -26,6 +26,7 @@ public class SpringSecurityConfig {
                                 .jwtAuthenticationConverter(new CustomJwtAuthenticationConverter())
                         )
                 );
+
         return http.build();
     }
 
