@@ -7,14 +7,13 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-//import org.springframework.data.elasticsearch.annotations.Document;
+
 //import org.springframework.data.elasticsearch.annotations.Document;
 //import org.springframework.data.elasticsearch.annotations.Document;
 
 @Getter
 @Setter
 @Entity
-//@Document(indexName = "ProductElasticSearch")
 public class Product extends BaseModel {
     private String title;
     private double price;
@@ -38,4 +37,6 @@ public class Product extends BaseModel {
         product.setDescription(productDto.getDescription());
         return product;
     }
+
+
 }
