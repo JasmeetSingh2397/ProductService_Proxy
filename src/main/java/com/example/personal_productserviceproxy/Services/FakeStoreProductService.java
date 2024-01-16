@@ -54,7 +54,7 @@ public class FakeStoreProductService implements IProductService{
 
     @Override
     public Product getSingleProduct(Long productId) throws ProductNotFoundException {
-        FakeStoreProductDTO fakeStoreProductDTO= (FakeStoreProductDTO) redisTemplate.opsForHash().get(productId, "PRODUCTS");
+        FakeStoreProductDTO fakeStoreProductDTO= (FakeStoreProductDTO) redisTemplate.opsForHash().get(productId, "FAKESTORE_PRODUCTS");
         if(fakeStoreProductDTO!=null){
             return getProduct(fakeStoreProductDTO);
         }
@@ -63,7 +63,7 @@ public class FakeStoreProductService implements IProductService{
         if (productDto == null) {
             throw new ProductNotFoundException("Product with specified id Not Found");
         }
-        redisTemplate.opsForHash().put(productId, "PRODUCTS", productDto);
+        redisTemplate.opsForHash().put(productId, "FAKESTORE_PRODUCTS", productDto);
         return getProduct(productDto);
     }
 
