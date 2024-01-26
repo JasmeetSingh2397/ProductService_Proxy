@@ -5,6 +5,8 @@ import com.example.personal_productserviceproxy.Exceptions.ProductNotFoundExcept
 import com.example.personal_productserviceproxy.Factories.ResponseFactory;
 import com.example.personal_productserviceproxy.Models.Product;
 import com.example.personal_productserviceproxy.Services.IProductService;
+import com.example.personal_productserviceproxy.Services.SearchService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,13 @@ public class ProductController {
 
     private IProductService productService;
 
-    public ProductController(IProductService productService) {
+
+    private SearchService searchService;
+
+    public ProductController(IProductService productService,SearchService searchService ) {
+
         this.productService = productService;
+        this.searchService= searchService;
     }
 
 
@@ -39,15 +46,11 @@ public class ProductController {
 
         Product product= productService.getSingleProduct(ProductId);
         return ResponseFactory.getResponseEntityForGetSingleProduct(product);
-
-
     }
-
-
 
     @PostMapping()
     public ResponseEntity<ProductDto> addNewProduct(@RequestBody ProductDto productDto){
-
+        searchService.insertProduct(Product.mapProductDtoToProduct(productDto));
         Product newProduct= productService.addNewProduct(Product.mapProductDtoToProduct(productDto));
         return ResponseFactory.getResponseEntityForAddNewProduct(newProduct);
 
@@ -56,6 +59,7 @@ public class ProductController {
     @PatchMapping("/{id}")
     public ResponseEntity<ProductDto> patchProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto) throws ProductNotFoundException {
         Product product = Product.mapProductDtoToProduct(productDto);
+        searchService.updateProduct(Product.mapProductDtoToProduct(productDto),productId);
         Product updatedProduct = productService.updateProduct(productId, product);
         return ResponseFactory.getResponseEntityForPutProduct(updatedProduct);
 
@@ -64,6 +68,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<ProductDto> putProduct(@PathVariable("id") Long productId, @RequestBody ProductDto productDto) throws ProductNotFoundException {
         Product product = Product.mapProductDtoToProduct(productDto);
+        searchService.updateProduct(Product.mapProductDtoToProduct(productDto),productId);
         Product replacedProduct= productService.replaceProduct(productId, product);
 
         return ResponseFactory.getResponseEntityForPatchProduct(replacedProduct);
@@ -72,7 +77,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ProductDto> deleteProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
-
+        searchService.deleteProduct(productId);
         Product product= productService.deleteProduct(productId);
         return ResponseFactory.getResponseEntityForDeleteProduct(product);
 

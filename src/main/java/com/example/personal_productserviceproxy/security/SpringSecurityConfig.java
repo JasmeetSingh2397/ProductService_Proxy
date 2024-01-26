@@ -15,7 +15,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/products/").permitAll()
+//                                .requestMatchers("/products/").permitAll()
 //                                hasAuthority("ADMIN")
                                 .anyRequest().permitAll() //only allow a person who has logged in to be able to access any URL
 //                                .anyRequest().permitAll() // allow anyone to access any url without needing login
@@ -29,5 +29,7 @@ public class SpringSecurityConfig {
 
         return http.build();
     }
+
+
 
 }

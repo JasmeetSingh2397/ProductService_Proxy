@@ -1,12 +1,11 @@
 package com.example.personal_productserviceproxy.Models;
 
 import com.example.personal_productserviceproxy.DTOs.ProductDto;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 //import org.springframework.data.elasticsearch.annotations.Document;
 //import org.springframework.data.elasticsearch.annotations.Document;
@@ -14,6 +13,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Document(indexName = "products")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product extends BaseModel {
     private String title;
     private double price;
@@ -22,6 +23,8 @@ public class Product extends BaseModel {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Category category;
     private String imageUrl;
+    @Transient
+    private String searchSimilar;
 
 
     public static Product mapProductDtoToProduct(ProductDto productDto){
