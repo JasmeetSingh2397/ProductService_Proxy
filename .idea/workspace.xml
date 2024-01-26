@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73d8c4d6-53ab-4eca-b0a4-55718dcc7c76" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/SearchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Repositories/SearchRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Services/SearchService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/utils/ElasticSearchUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ExceptionAdvices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/Models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/security/SpringSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/personal_productserviceproxy/security/SpringSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,12 +170,12 @@
     </configuration>
     <configuration name="PersonalProductServiceProxyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <envs>
-        <env name="PRODUCT_SERVICE_DB_URL" value="jdbc:mysql://localhost:3306/test" />
-        <env name="PRODUCT_SERVICE_DB_USERNAME" value="root" />
+        <env name="PRODUCT_SERVICE_DB_URL" value="jdbc:mysql://productservice.crcc4a408npb.eu-north-1.rds.amazonaws.com:3306/ProductService" />
+        <env name="PRODUCT_SERVICE_DB_USERNAME" value="ProductService" />
         <env name="PRODUCT_SERVICE_DB_PASSWORD" value="password" />
         <env name="PRODUCT_SERVICE_SERVER_PORT" value="8080" />
         <env name="PRODUCT_SERVICE_JWT_ISSUER_URI" value="http://localhost:9000" />
-        <env name="PRODUCT_SERVICE_REDIS_URL" value="testjasmeetrediscache.oe3esc.clustercfg.eun1.cache.amazonaws.com" />
+        <env name="PRODUCT_SERVICE_REDIS_URL" value="master.redis-test-01.oe3esc.eun1.cache.amazonaws.com:6379" />
       </envs>
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="ProductService" />
@@ -283,7 +272,7 @@
       <workItem from="1705426654139" duration="114000" />
       <workItem from="1705593328142" duration="1446000" />
       <workItem from="1705656855339" duration="68000" />
-      <workItem from="1706251049302" duration="7513000" />
+      <workItem from="1706251049302" duration="17160000" />
     </task>
     <servers />
   </component>
